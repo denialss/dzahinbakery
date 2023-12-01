@@ -7,7 +7,7 @@
             <div class="row mt-4">
               <div class="col-md-12">
                 <div class="banner-item"
-                  style="background-image: url(assets/user/images/test.jpg); background-repeat: no-repeat; background-position: right; height: 682px;">
+                  style="background-image: url(assets/img/test.jpg); background-repeat: no-repeat; background-position: right; height: 682px;">
                   <div class="banner-content padding-large">
                     <h1 class="display-1 text-uppercase text-dark pb-2">Dzahin Bakery</h1>
                     <p class="">Dapatkan sensasi kelezatan sejati dengan setiap gigitan roti kami. Dibuat dengan

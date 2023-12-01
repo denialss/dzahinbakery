@@ -139,53 +139,54 @@
                                                         </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="post" name="tambahproduk" action="<?php echo site_url('admin/edit_produk');?>">
+                                                            <form method="post" name="editproduk" action="<?php echo site_url('admin/edit_produk');?>">
                                                                 <div class="form-group">
+                                                                <input type="hidden" name="idProduk" value="<?php echo $val->idProduk; ?>">
                                                                 <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Masukkan Foto : </label>
                                                                     <div class="custom-file">
                                                                     <input type="file" name="foto" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" value="" required="required">
-                                                                        <label class="custom-file-label" for="inputGroupFile01"><?php echo $val->foto; ?></label>
+                                                                        <label class="custom-file-label" for="inputGroupFile01"></label>
                                                                     </div>
                                                                 </div>
 
-                                                            <div class="form-group">
-                                                                <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Kategori :</label>
-                                                                    <select class="custom-select" id="inputGroupSelect02" name="idKategori" required="required">
-                                                                        <option name="namaKategori" value=""><?php echo $val->namaKategori; ?></option>
-
-                                                                        <option name="namaKategori" value=""><?php echo $val->namaKategori; ?></option>
-                                                                        
-                                                                    </select>
-                                                            </div>
-                                                            
-                                                            <div class="form-group">
-                                                            <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Nama Produk :</label>
-                                                                <div class="custom-file">
-                                                                <input type="text" name="namaProduk" class="form-control" value="<?php echo $val->namaProduk; ?>" id="recipient-name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                            <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Stok Tersedia :</label>
-                                                                <div class="custom-file">
-                                                                <input type="text" name="stok" class="form-control" value="<?php echo $val->stok; ?>" id="recipient-name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                            <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Harga :</label>
-                                                                <div class="custom-file">
-                                                                <input type="text" name="harga" class="form-control" value="<?php echo $val->harga; ?>" id="recipient-name">
-                                                                </div>
-                                                            </div>
                                                                 <div class="form-group">
-                                                                <label for="message-text" class="col-form-label label-align-left" style="font-size:15px;">Deskripsi Produk :</label>
-                                                                <textarea name="deskripsi_produk" class="form-control" id="message-text"><?php echo $val->deskripsi_produk; ?></textarea>
-                                                            </div>
+                                                                    <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Kategori :</label>
+                                                                        <select class="custom-select" id="inputGroupSelect02" name="idKategori" required="required">
+                                                                            <option  value=""><?php echo $val->namaKategori; ?></option>
+                                                                            <?php foreach ($kategori as $var) { ?>
+                                                                                <option name="idKategori" value="<?php echo $var->idKategori; ?>"><?php echo $var->namaKategori; ?></option>
+                                                                            <?php } ?>
+                                                                        </select>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Nama Produk :</label>
+                                                                    <div class="custom-file">
+                                                                    <input type="text" name="namaProduk" class="form-control" value="<?php echo $val->namaProduk; ?>" id="recipient-name">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Stok Tersedia :</label>
+                                                                    <div class="custom-file">
+                                                                    <input type="text" name="stok" class="form-control" value="<?php echo $val->stok; ?>" id="recipient-name">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Harga :</label>
+                                                                    <div class="custom-file">
+                                                                    <input type="text" name="harga" class="form-control" value="<?php echo $val->harga; ?>" id="recipient-name">
+                                                                    </div>
+                                                                </div>
+                                                                    <div class="form-group">
+                                                                    <label for="message-text" class="col-form-label label-align-left" style="font-size:15px;">Deskripsi Produk :</label>
+                                                                    <textarea name="deskripsi_produk" class="form-control" id="message-text"><?php echo $val->deskripsi_produk; ?></textarea>
+                                                                </div>
+                                                        </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-success">Simpan</button>
+                                                                </div>
                                                             </form>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                                                        <button type="submit" class="btn btn-success">Simpan</button>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

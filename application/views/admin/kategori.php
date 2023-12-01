@@ -52,7 +52,7 @@
                                                   <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Kategori">
                                                       <a class="btn-warning" href="#" data-toggle="modal"  data-target="#editkategori<?php echo $val->idKategori ?>" ><i class="fa fa-edit"></i></a></button>
                                                   <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Kategori">
-                                                      <a class="btn-danger" href="<?php echo site_url('adminpanel/kategori/delete/' . $val->idKategori); ?>" onclick="return confirm('Yakin Akan Hapus Data Ini?')"><i class="fa fa-trash"></i></a></button>
+                                                      <a class="btn-danger" href="<?php echo site_url('admin/delete_kategori/' . $val->idKategori); ?>" onclick="return confirm('Yakin Akan Hapus Data Ini?')"><i class="fa fa-trash"></i></a></button>
                                               </div>
                                               <!-- Modal Edit Kategori -->
                                                 <div class="modal fade" id="editkategori<?php echo $val->idKategori ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -62,8 +62,9 @@
                                                         <h5 class="modal-title" id="exampleModalLabel">Ubah Kategori</h5>
                                                       </div>
                                                       <div class="modal-body">
-                                                        <form method="post" name="editkategori" action="<?php echo site_url('adminpanel/kategori/edit'); ?>">
+                                                        <form method="post" name="editkategori" action="<?php echo site_url('admin/edit_kategori'); ?>">
                                                           <div class="form-group">
+                                                            <input type="hidden" name="idkategori" value="<?php echo $val->idKategori; ?>">
                                                             <label for="inputEmail3" class="col-form-label">Nama Kategori</label>
                                                             <input type="text" name="namakategori" class="form-control" value="<?php echo $val->namaKategori?>" id="inputEmail3" require="required">
                                                           </div>
@@ -98,7 +99,7 @@
                                       </button>
                                     </div>
                                     <div class="modal-body">
-                                      <form method="post" name="tambahkategori" action="<?php echo site_url('adminpanel/kategori/add'); ?>">
+                                      <form method="post" name="tambahkategori" action="<?php echo site_url('admin/add_kategori'); ?>">
                                         <div class="form-group">
                                           <label for="inputEmail3" class="col-form-label text-">Nama Kategori</label>
                                           <input type="text" name="namakategori" class="form-control" id="inputEmail3" require="required">

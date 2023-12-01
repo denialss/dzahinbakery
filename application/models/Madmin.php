@@ -47,13 +47,15 @@ class Madmin extends CI_Model
 	}
 
   public function edit_produk_action($dataproduk){
-		$data=array(
+		$dataUpdate=array(
+      'idProduk' => $id ['idProduk'],
       'foto'=>$dataproduk['foto'],
-      'idKategori'=>$dataproduk['kategori'], 
-      'namaProduk'=>$dataproduk['nama'], 
+      'idKategori'=>$dataproduk['idKategori'], 
+      'namaProduk'=>$dataproduk['namaProduk'], 
       'harga'=>$dataproduk['harga'], 
       'stok'=>$dataproduk['stok'], 
-      'deskripsi_produk'=>$dataproduk['deskripsi']);
-		$this->db->insert('tbl_produk', $data);
+      'deskripsi_produk'=>$dataproduk['deskripsi_produk']
+    );
+      $this->Madmin->update('tbl_produk', $dataUpdate, 'idProduk', $id);
 	}
 }

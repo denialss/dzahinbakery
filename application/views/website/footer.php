@@ -44,7 +44,7 @@
     <script src="<?php echo base_url('assets/user/js/main.js');?>"></script>
 
     <!-- Login -->
-    <script src="<?php echo base_url('assets/admin/build/js/login.js');?>"></script>
+    <script src="<?php echo base_url('assets/admin/js/login.js');?>"></script>
 </body>
 
 </html>

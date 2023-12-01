@@ -108,8 +108,8 @@
   <header id="header" class="site-header text-black">
     <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3 top-nav fixed-top" style="background-color: rgba(246, 245, 242, 0.9);">
       <div class="container-fluid">
-        <a class="navbar-brand" href="<?php echo site_url('Home');?>">
-          <img src="<?php echo base_url('assets/user/images/teslogo.png');?>" class="logo">
+        <a class="navbar-brand" href="<?php echo site_url('home');?>">
+          <img src="<?php echo base_url('assets/img/teslogo.png');?>" class="logo">
         </a>
         <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,13 +128,13 @@
           <div class="offcanvas-body">
             <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link me-4" href="<?php echo site_url('Home');?>">Home</a>
+                <a class="nav-link me-4" href="<?php echo site_url('home');?>">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="<?php echo site_url('Produk');?>">Produk</a>
+                <a class="nav-link me-4" href="<?php echo site_url('home/produk');?>">Produk</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="<?php echo site_url('About');?>">About Us</a>
+                <a class="nav-link me-4" href="<?php echo site_url('home/about');?>">About Us</a>
               </li>
               <li class="nav-item">
                 <a type="button" data-toggle="modal"  data-target="#loginform" class="btn btn-primary" >LOGIN</a>
@@ -146,7 +146,7 @@
                   <ul class="d-flex justify-content-end list-unstyled">
 
                     <li class="nav-item">
-                      <a class="nav-link" href="<?php echo site_url('produk/cart');?>">
+                      <a class="nav-link" href="<?php echo site_url('home/cart');?>">
                         <svg class="cart" width="18" height="18">
                           <use xlink:href="#cart"></use>
                         </svg>
@@ -162,10 +162,10 @@
                       </a>
                       <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownPages">
                         <li>
-                          <a href="<?php echo site_url('profile');?>" class="dropdown-item">Profile</a>
+                          <a href="<?php echo site_url('home/profil');?>" class="dropdown-item">Profile</a>
                         </li>
                         <li>
-                          <a href="<?php echo site_url('controller/informasi_pesanan');?>" class="dropdown-item item-anchor">Pesanan</a>
+                          <a href="<?php echo site_url('home/pesanan');?>" class="dropdown-item item-anchor">Pesanan</a>
                         </li>
                         <li>
                           <a href="<?php echo site_url('home/logout');?>" class="dropdown-item item-anchor">Logout</a>
