@@ -77,7 +77,7 @@ class Home extends CI_Controller{
 	public function detail_produk($idProduk){
         	$dataWhere = array('idProduk' => $idProduk);
 			$data['produk'] = $this->Madmin->get_by_id('tbl_produk', $dataWhere)->row_object();
-        	$data['detailProduk'] = $this->Madmin->tampilJoin()->result();
+        	$data['detailProduk'] = $this->Madmin->tampilJoin()->row_object();
 			$this->load->view('website/header');
 			$this->load->view('website/detail_produk', $data);
 			$this->load->view('website/footer');

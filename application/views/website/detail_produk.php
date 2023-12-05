@@ -27,7 +27,6 @@
             <div class="col-lg-7 pb-5">
                 <h3 class="font-weight-semi-bold"><?php echo $produk->namaProduk; ?></h3>
                 <h3 class="font-weight-semi-bold"><?php echo $produk->idKategori; ?></h3>
-                <!-- <h5 class="font-weight-semi-bold">Kategori</h5> -->
                 <h3 class="font-weight-semi-bold mb-4"><?php echo $produk->harga; ?></h3>
                 <p class="mb-4"><?php echo $produk->deskripsi_produk; ?></p>
 

@@ -9,7 +9,7 @@
             <div class="col-xl-">
                 <!-- Account details card-->
                 <div class="card mb-4">
-                    <div class="card-header">Account Details</div>
+                    <div class="card-header">Edit Profil</div>
                     <div class="card-body">
                         <form method="post" name="editprofil" action="<?php echo site_url('home/edit_profil_action');?>">
                             <!-- Form Group (username)-->

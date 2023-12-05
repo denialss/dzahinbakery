@@ -91,7 +91,7 @@ class Admin extends CI_Controller
         }
       }
 
-    public function edit_produk()
+    public function edit_produk($id)
       {
         $id = $this->input->post('idProduk');
         $foto = $this->input->post('foto');

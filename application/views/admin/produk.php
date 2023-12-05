@@ -27,6 +27,7 @@
                                             </th>
                                             
                                             <th scope="col" class="align-middle">id Produk</th>
+                                            <th scope="col" class="align-middle">Kategori</th>
                                             <th scope="col" class="align-middle">Foto Produk</th>
                                             <th scope="col" class="align-middle">Nama Produk</th>
                                             <th scope="col" class="align-middle">Stok</th>
@@ -46,6 +47,9 @@
                                             </th>
                                             <td class="align-middle">
                                             <?php echo $val->idProduk; ?>
+                                            </td>
+                                            <td class="align-middle">
+                                            <?php echo $val->namaKategori; ?>
                                             </td>
                                             <td class="align-middle"><img src="<?=base_url()?>upload/<?=$val->foto?>" style="max-width: 80px;" alt=""></td>
                                             <td class="align-middle">
@@ -139,7 +143,7 @@
                                                         </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="post" name="editproduk" action="<?php echo site_url('admin/edit_produk');?>">
+                                                            <form method="post" name="editproduk" action="<?php echo site_url('admin/edit_produk'. $val->idProduk);?>">
                                                                 <div class="form-group">
                                                                 <input type="hidden" name="idProduk" value="<?php echo $val->idProduk; ?>">
                                                                 <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Masukkan Foto : </label>
