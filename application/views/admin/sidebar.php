@@ -12,21 +12,21 @@
 
     <!-- Ini dari colorlib -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo base_url('assets/colorlib/fonts/icomoon/style.css');?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/admin/colorlib/fonts/icomoon/style.css');?>">
 
-    <link rel="stylesheet" href="<?php echo base_url('assets/colorlib/css/owl.carousel.min.css');?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/admin/colorlib/css/owl.carousel.min.css');?>">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/colorlib/css/bootstrap.min.css');?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/admin/colorlib/css/bootstrap.min.css');?>">
     
     <!-- Style -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/colorlib/css/style.css');?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/admin/colorlib/css/style.css');?>">
 
 
     <!-- /Ini dari colorlib -->
       <title>Dashboard Admin | Dzahin Bakery</title>
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="<?php echo base_url('assets/admin/vendors/bootstrap/dist/css/bootstrap.min.css');?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/admin/vendors/bootstrap/css/bootstrap.min.css');?>">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="<?php echo base_url('assets/admin/vendors/font-awesome/css/font-awesome.min.css');?>">
         <!-- NProgress -->
@@ -36,7 +36,7 @@
         <!-- bootstrap-progressbar -->
         <link rel="stylesheet" href="<?php echo base_url('assets/admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css');?>">
         <!-- JQVMap -->
-        <link rel="stylesheet" href="<?php echo base_url('assets/admin/vendors/jqvmap/dist/jqvmap.min.css');?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/admin/vendors/jqvmap/jqvmap.min.css');?>">
         <!-- bootstrap-daterangepicker -->
         <link rel="stylesheet" href="<?php echo base_url('assets/admin/vendors/bootstrap-daterangepicker/daterangepicker.css');?>">
     

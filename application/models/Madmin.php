@@ -11,7 +11,7 @@ class Madmin extends CI_Model
 
   public function user_check($u, $p)
   {
-    $q = $this->db->get_where('tbl_user', array('username' => $u, 'password' => $p, 'is_active' => 'Y'));
+    $q = $this->db->get_where('tbl_user', array('username' => $u, 'password' => $p));
     return $q;
   }
 

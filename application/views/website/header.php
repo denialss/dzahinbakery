@@ -136,9 +136,12 @@
               <li class="nav-item">
                 <a class="nav-link me-4" href="<?php echo site_url('home/about');?>">About Us</a>
               </li>
+
+              <?php if (empty($this->session->userdata('User'))) { ?>
               <li class="nav-item">
                 <a type="button" data-toggle="modal"  data-target="#loginform" class="btn btn-primary" >LOGIN</a>
               </li>
+              <?php } else {?>
 
 
               <li class="nav-item">
@@ -182,6 +185,7 @@
                   </ul>
                 </div>
               </li>
+              <?php } ?>
             </ul>
 
 
@@ -199,7 +203,7 @@
                     <div class="col-md-6">
                       <h1>LOGIN</h1>
                       <p class="text-medium-emphasis">Sign In to your account</p>
-                            <form action="<?php echo site_url('home/masuk'); ?>" method="post" id="login" autocomplete="off">
+                            <form action="<?php echo site_url('home/login_action'); ?>" method="post" id="login" autocomplete="off">
                               <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
@@ -254,7 +258,7 @@
                     <div class="col-md-10 mx-auto">
                       <h1>Register</h1>
                       <p class="text-medium-emphasis">Create your account</p>
-                            <form action="<?php echo site_url('home/registrasi'); ?>" method="post" id="register" autocomplete="off">
+                            <form action="<?php echo site_url('home/register_action'); ?>" method="post" id="register" autocomplete="off">
                               <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
@@ -273,7 +277,7 @@
                                       <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                                       </div>
-                                      <input name="namaKonsumen" type="text" value="" class="form-control" placeholder="nama konsumen" aria-label="Username" required="true" aria-describedby="basic-addon1" />
+                                      <input name="name" type="text" value="" class="form-control" placeholder="nama" aria-label="Username" required="true" aria-describedby="basic-addon1" />
                                     </div>
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
@@ -288,13 +292,13 @@
                                     <div class="input-group-prepend">
                                       <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
                                     </div>
-                                    <input name="no_telp" type="text" value="" class="form-control" placeholder="nomor telepon" aria-label="Username" required="true" aria-describedby="basic-addon1" />
+                                    <input name="phone" type="text" value="" class="form-control" placeholder="nomor telepon" aria-label="Username" required="true" aria-describedby="basic-addon1" />
                                   </div>
                                   <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                       <span class="input-group-text" id="basic-addon1"><i class="fas fa-map"></i></span>
                                     </div>
-                                    <input name="alamat" type="text" value="" class="form-control" placeholder="alamat" aria-label="Username" required="true" aria-describedby="basic-addon1" />
+                                    <input name="address" type="text" value="" class="form-control" placeholder="alamat" aria-label="Username" required="true" aria-describedby="basic-addon1" />
                                   </div>
                                 </div>
                               </div>
