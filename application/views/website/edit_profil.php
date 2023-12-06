@@ -12,6 +12,8 @@
                     <div class="card-header">Edit Profil</div>
                     <div class="card-body">
                         <form method="post" name="editprofil" action="<?php echo site_url('home/edit_profil_action');?>">
+                        <input type="hidden" name="username" class="form-control" id="inputUsername" type="text"
+                                    placeholder="Masukkan Username" value="<?php echo $profil->idUser; ?>">
                             <!-- Form Group (username)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputUsername">Username</label>
@@ -43,7 +45,7 @@
                                     placeholder="Maukkan No Telfon" value="<?php echo $profil->phone; ?>">
                             </div>
                             <!-- Save changes button-->
-                            <a class="btn btn-primary" type="submit">Simpan</a>
+                            <button class="btn btn-primary" type="submit">Simpan</button>
                         </form>
                     </div>
                 </div>

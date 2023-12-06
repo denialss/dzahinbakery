@@ -45,6 +45,9 @@
 
     <!-- Login -->
     <script src="<?php echo base_url('assets/admin/js/login.js');?>"></script>
+
+    <!-- Sweet Alert
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 </body>
 
 </html>

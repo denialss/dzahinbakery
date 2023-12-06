@@ -31,12 +31,12 @@
                         </div>
                         <div class="card-body p-0 mt-4">
                             <h3 class="card-title text-uppercase">
-                                <a href="detail_produk.html"><?php echo $val->namaProduk; ?></a>
+                                <a><?php echo $val->namaProduk; ?></a>
                             </h3>
                             <p><?php echo $val->namaKategori; ?></p>
                             <p>Rp.<?php echo $val->harga; ?></p>
                             <a href="<?php echo site_url('home/detail_produk/' . $val->idProduk);?>" class="btn btn-primary">Detail Produk</a>
-                            <a href="<?php echo site_url('home/Cart/'. $val->idProduk);?>" class="btn btn-primary">Add to Cart</a>
+                            <a href="<?php echo site_url('home/add_cart/'. $val->idProduk);?>" class="btn btn-primary">Add to Cart</a>
                         </div>
                     </div>
                 </div>

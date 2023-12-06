@@ -153,6 +153,10 @@
                         <svg class="cart" width="18" height="18">
                           <use xlink:href="#cart"></use>
                         </svg>
+                        <?php if ($this->cart->contents()){ ?>
+                        <span class="position-absolute translate-middle p-2 bg-danger border border-light rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                        <?php }?>
                       </a>
                     </li>
 

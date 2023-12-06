@@ -57,8 +57,8 @@
                     <a href="<?php echo site_url('home/detail_produk/' . $val->idProduk);?>"><img src="<?php echo base_url()?>upload/<?=$val->foto?>" alt="product-item" class="product-image img-fluid"></a>
                   </div>
                   <div class="cart-concern">
-                    <h3 class="card-title text-uppercase pt-3 text-primary">
-                      <a href="<?php echo site_url('home/detail_produk/' . $val->idProduk);?>" class="text-primary"><?php echo $val->namaProduk; ?></a>
+                    <h3 class="card-title text-uppercase pt-3">
+                      <a><?php echo $val->namaProduk; ?></a>
                     </h3>
                     <div class="cart-info">
                       <a class="pseudo-text-effect" href="<?php echo site_url('home/add_cart/'. $val->idProduk);?>" data-after="ADD TO CART"><span>Rp. <?php echo $val->harga; ?></span></a>

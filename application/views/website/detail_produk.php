@@ -26,7 +26,7 @@
 
             <div class="col-lg-7 pb-5">
                 <h3 class="font-weight-semi-bold"><?php echo $produk->namaProduk; ?></h3>
-                <h3 class="font-weight-semi-bold"><?php echo $produk->idKategori; ?></h3>
+                <h3 class="font-weight-semi-bold"><?php echo $detailProduk->namaKategori; ?></h3>
                 <h3 class="font-weight-semi-bold mb-4"><?php echo $produk->harga; ?></h3>
                 <p class="mb-4"><?php echo $produk->deskripsi_produk; ?></p>
 
@@ -45,9 +45,9 @@
                             </button>
                         </div>
                     </div>
-                    <button class="btn btn-primary px-3"><a href="<?php echo site_url('controller/cart');?>"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a></button>
+                    <a class="btn btn-primary px-3" href="<?php echo site_url('home/add_cart/'. $produk->idProduk);?>"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
                 </div>
             </div>
         </div>
-    </div>
+</div>
     <!-- Shop Detail End -->

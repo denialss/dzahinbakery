@@ -5,6 +5,7 @@ class Home extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('Madmin');
+		$this->load->library('cart');
 		}
 
  
@@ -90,12 +91,54 @@ class Home extends CI_Controller{
 		}
 
 	public function cart(){
+			$id = $this->session->userdata('idUser');
+			$datawhere = array('idUser' => $id);
+			$data['profil'] = $this->Madmin->get_by_id('tbl_user', $datawhere)->row();
 		
-			$data['detailProduk'] = $this->Madmin->tampilJoin()->result();
+			$data['cartItems'] = $this->cart->contents();
 			$this->load->view('website/header');
 			$this->load->view('website/cart', $data);
 			$this->load->view('website/footer');
 		}
+	
+	public function add_cart($idProduk)
+		{
+			$dataWhere = array('idProduk' => $idProduk);
+			$produk = $this->Madmin->get_by_id('tbl_produk', $dataWhere)->row_object();
+
+			// add product to the cart
+			$data = array(
+			'id' => $produk->idProduk,
+			'image' => $produk->foto,
+			'name' => $produk->namaProduk,
+			'price' => $produk->harga,
+			'qty' => 1
+			);
+			$this->cart->insert($data);
+
+			redirect(base_url($redirect_page, 'refresh'));
+		}
+
+	public function update_cart($rowid)
+		{
+			$i = 1;
+			foreach ($this->cart->contents() as $item){
+				$dataUpdate = array(
+					'rowid' => $item['rowid'],
+					'qty' => $this->input->post($i . ['qty']),
+				);
+	
+				$this->cart->update($dataUpdate);
+				$i++;
+			}
+			redirect(base_url('home/cart'));
+		}
+	
+	public function delete_cart($rowid)
+	{
+		$this->cart->remove($rowid);
+		redirect(base_url('home/cart'));
+	}
 
 	public function profil(){
 			$id = $this->session->userdata('idUser');
@@ -118,20 +161,22 @@ class Home extends CI_Controller{
 
 	public function edit_profil_action()
 		{
-		  $username = $this->input->post('username');
-		  $name = $this->input->post('name');
-		  $email = $this->input->post('email');
-		  $address = $this->input->post('address');
-		  $phone = $this->input->post('phone');
+			$id = $this->session->userdata('idUser');
+			$username = $this->input->post('username');
+			$name = $this->input->post('name');
+			$email = $this->input->post('email');
+			$address = $this->input->post('address');
+			$phone = $this->input->post('phone');
 	  
 		  $dataUpdate = array(
+			'idUser' => $id,
 			'username' => $username,
 			'name' => $name,
 			'email' => $email,
 			'phone' => $phone,
 			'address' => $address,
 		  );
-		  $this->Madmin->insert('tbl_user', $dataUpdate);
+		  $this->Madmin->update('tbl_user', $dataUpdate, 'idUser', $id);
 		  redirect('home');
 		}
 }
