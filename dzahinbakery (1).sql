@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2023 at 05:55 PM
+-- Generation Time: Dec 06, 2023 at 04:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -51,6 +51,14 @@ CREATE TABLE `tbl_kategori` (
   `namaKategori` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tbl_kategori`
+--
+
+INSERT INTO `tbl_kategori` (`idKategori`, `namaKategori`) VALUES
+(1, 'Kue Kering'),
+(2, 'Kue Basah');
+
 -- --------------------------------------------------------
 
 --
@@ -66,6 +74,20 @@ CREATE TABLE `tbl_produk` (
   `deskripsi_produk` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `stok` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_produk`
+--
+
+INSERT INTO `tbl_produk` (`idProduk`, `idKategori`, `foto`, `namaProduk`, `harga`, `deskripsi_produk`, `stok`) VALUES
+(1, 2, 'donat2.jpg', 'Donat', '5.000', 'Kudapan manis dengan perpaduan sempurna antara tekstur lembut dan empuk, serta aroma yang menggugah selera.', 10),
+(2, 2, 'cream-bun1.jpg', 'Roti Cream', '8.000', 'Kue lembut dengan topping krim manis serta memiliki tekstur yang lembut dan creamy. Cocok untuk dinikmati sebagai camilan atau hidangan penutup.', 15),
+(3, 2, 'roti_sosis.jpg', 'Roti Sosis', '10.000', 'Roti bun dengan topping sosis dan saus, memberikan citarasa gurih.', 10),
+(4, 2, 'roti_keju.jpg', 'Roti Keju', '8.000', 'Roti bun dengan isian dan topping keju.', 10),
+(5, 2, 'roti_blueberry1.jpg', 'Roti Blueberry', '8.000', 'Roti bun dengan isian blueberry.', 15),
+(6, 2, 'Roti_coklat_keju1.jpg', 'Roti Coklat Keju', '8.000', 'Roti bun dengan isian coklat dan keju.', 10),
+(7, 2, 'roti_kopi.jpg', 'Roti Kopi', '8.000', 'Roti bun dengan citarasa kopi, cocok menjadi hidangan pelengkap ketika ngopi.', 15),
+(8, 2, 'roti_meses.jpg', 'Roti Coklat', '8.000', 'Roti bun dengan isian coklat.', 10);
 
 -- --------------------------------------------------------
 
@@ -88,7 +110,7 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`idUser`, `username`, `password`, `name`, `email`, `phone`, `address`) VALUES
-(1, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', 'user@gmail.com', '087765431234', 'Jalan Nusa Indah');
+(2, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', 'user@gmail.com', '087765431234', 'Jalan Nusa Indah II');
 
 --
 -- Indexes for dumped tables
@@ -132,19 +154,19 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `idKategori` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idKategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
-  MODIFY `idProduk` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `idUser` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUser` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
