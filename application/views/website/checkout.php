@@ -1,138 +1,88 @@
-<style>
-.zoom {
-  transition: transform .2s; /* Animation */
-}
-
-.zoom:hover {
-  transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-  position: absolute;
-  display: block;
-  margin-top: -50px;
-  width: 15%;
-}
-</style>
     <!-- Cart Start -->
     <div class="container-fluid pt-5">
-        <div class="row px-xl-5 mt-5">
-            <?php if (empty($this->cart->contents())) { ?>
-                <div class="col-lg-12 table-responsive mb-5 overflow-hidden">
-                    <table class="table table-bordered text-center justify-content-center mb-0">
-                        <tbody>
-                            <img class="px-3 mx-auto d-block" src="<?php echo base_url('assets/user/images/empty_cart.jpg');?>" alt="" width="500px"><br>
-                            <h6 class="font-weight m-0 text-center" style="font-size: 20px;">Oops! Anda belum memasukkan produk ke keranjang.</h6>
-                        </tbody>
-                    </table>
-                </div>
-            <?php } else {?>
+        <div class="row px-xl-5 mt-4">
             <div class="col-lg-8 table-responsive mb-5 overflow-hidden">
-                <table class="table table-bordered text-center mb-0">
-
-                    <thead class="bg-secondary text-dark">
-                        <tr>
-                            <th>Produk</th>
-                            <th>Harga</th>
-                            <th>Jumlah</th>
-                            <th>Total</th>
-                            <th>Hapus</th>
-                        </tr>
-                    </thead>
-                    <tbody class="align-middle">
-                    <?php $i = 1;?>
-                    <?php foreach ($cartItems as $item) { ?>
-                        <tr>
-                        <input name="rowid" type="hidden" class="form-control form-control-sm bg-secondary text-center" value="<?php echo $item['rowid']; ?>">
-                            <td align="left" class="align-middle"><img class="zoom" src="<?php echo base_url()?>upload/<?=$item['image']?>" alt="" width=30px>
-                            <?php echo  $item['name']; ?></td>
-                            <td class="align-middle"><?php echo $item['price']*1000; ?></td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input name="[qty]" type="text" class="form-control form-control-sm bg-secondary text-center"
-                                        value="<?php echo $item['qty']; ?>">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle"><?php echo $item["price"] * $item["qty"] * 1000; ?></td>
-                            <td class="align-middle">
-                                <a href="<?php echo site_url('home/delete_cart/' . $item['rowid']);?>"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></a>
-                            </td>
-                        </tr>
-                        <?php $i++;?>
-                        <?php } ?>
-                    </tbody>
-                </table>
-                <!-- <div class="row justify-content-end">
-                    <div class="col-lg-3 table-responsive mb-5">
-                        <a href="<?php echo site_url('home/update_cart'. $item['rowid']);?>"><button class="btn btn-block btn-primary my-2 py-2">Update Cart</button></a>
-                    </div>
-                </div> -->
-            </div>
-            <div class="col-lg-4 table-responsive mb-5 position-fixed end-0 top-0 mt-5 py-5 mr-4" >
                 <div class="card border-secondary mb-5">
-                    <!-- <div class="card-header bg-secondary border-0">
-                        <h6 class="font-weight-semi-bold m-0 " style="font-size: 20px;">Pengiriman</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-0 pt-1">
-                            <h6 class="font-weight-medium">Alamat Pengiriman :</h6>
-                            <h6 class="font-weight-medium"><a href="#" data-toggle="tooltip" data-placement="top" title="Ganti Alamat"><?php echo $profil->address; ?></a></h6>
+                        <div class="card-header bg-secondary border-0">
+                            <h6 class="font-weight-semi-bold m-0 " style="font-size: 20px;">Alamat Pengiriman</h6>
                         </div>
-                        <div class="d-flex justify-content-between mb-0 pt-1 align-middle">
-                            <h6 class="font-weight-medium">Jasa Pengiriman :</h6>
-                            <h6 class="font-weight-medium">Ambil di toko
-                                <a href="#"  data-toggle="modal" data-target="#pengiriman">
-                                    <span class="position-absolute translate-middle p-0 bg-white rounded-circle fa fa-info-circle"></span>
-                                </a>
-                            </h6>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-left m-0 pt-1 align-middle">
+                                <h6 class="font-weight-medium">Jasa Pengiriman :</h6>
+                                <h6 class="font-weight-medium">Ambil di toko
+                                    <a href="#"  data-toggle="modal" data-target="#pengiriman">
+                                        <span class="position-absolute translate-middle p-0 bg-white rounded-circle fa fa-info-circle"></span>
+                                    </a>
+                                </h6>
+                            </div>
                         </div>
-                    </div>
-                    <form method="post" name="pesanan" action="<?php echo site_url('home/pesanan');?>">
-                    <div class="card-header bg-secondary border-0">
-                        <h6 class="font-weight-semi-bold m-0 " style="font-size: 20px;">Metode Pembayaran</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-left pt-1">
-                            <a href="" data-toggle="modal" data-target="#bca"><img class="px-3" src="<?php echo base_url('assets/user/images/bca.png');?>" alt="" width="100px"></a>
-                            <a href="" data-toggle="modal" data-target="#dana"><img class="px-3" src="<?php echo base_url('assets/user/images/dana.png');?>" alt="" width="120px"></a>
-                            <a href="" data-toggle="modal" data-target="#gopay"><img class="px-3" src="<?php echo base_url('assets/user/images/gopay.png');?>" alt="" width="120px"></a>
-                        </div><br>
-                        <div>
-                        <label for="formFile" class="form-label "><b>Upload Bukti Pembayaran</b></label>
-                            <input class="form-control" type="file" id="formFile">
-                    </div>
-                    </div> -->
-                    <div class="card-header bg-secondary border-0">
-                        <h6 class="font-weight-semi-bold m-1" style="font-size: 20px;">Ringkasan Keranjang</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium">Rp. <?php echo $this->cart->format_number($this->cart->total()*1000);?></h6>
+                        <div class="card-header bg-secondary border-0">
+                            <h6 class="font-weight-semi-bold m-0 " style="font-size: 20px;">Metode Pembayaran</h6>
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Biaya pengiriman</h6>
-                            <h6 class="font-weight-medium">free</h6>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-left pt-1">
+                                <a href="" data-toggle="modal" data-target="#bca"><img class="px-3" src="<?php echo base_url('assets/user/images/bca.png');?>" alt="" width="100px"></a>
+                                <a href="" data-toggle="modal" data-target="#dana"><img class="px-3" src="<?php echo base_url('assets/user/images/dana.png');?>" alt="" width="120px"></a>
+                                <a href="" data-toggle="modal" data-target="#gopay"><img class="px-3" src="<?php echo base_url('assets/user/images/gopay.png');?>" alt="" width="120px"></a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer border-secondary bg-transparent">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h6 class="font-weight-bold" style="font-size: 20px;">Total</h6>
-                            <h6 class="font-weight-bold" style="font-size: 20px;">Rp. <?php echo $this->cart->format_number($this->cart->total()*1000);?></h6>
+                        <div class="card-header bg-secondary border-0">
+                            <h6 class="font-weight-semi-bold m-0 " style="font-size: 20px;">Formulir Pembayaran</h6>
                         </div>
-                        <a type="submit" class="btn btn-block btn-primary my-3 py-3 text-light" href="<?php echo site_url('home/checkout');?>">Checkout</a>
-                    </div>
-                    </form>
+                        <div class="card-body">
+                            <div class="justify-content-left m-0 pt-1 align-middle">
+                                <form method="post" name="pembayaran" action="<?php echo site_url('home/add_pesanan');?>">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Nama Penerima</label>
+                                        <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $profil->name; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Tanggal Pengambilan</label>
+                                        <input class="form-control" class='date' type="date" name="date" required='required'>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Jam Pengambilan</label>
+                                        <input class="form-control" class='time' type="time" name="time" required='required'>
+                                    </div>
+                                    <div>
+                                        <label for="formFile" class="form-label">Upload Bukti Pembayaran</label>
+                                            <input class="form-control" type="file" id="formFile" required='required'>
+                                    </div><br>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
                 </div>
             </div>
-            <?php }?>
+            <div class="col-lg-4 table-responsive mb-5 overflow-hidden position-fixed end-0 top-0 mt-5 py-4 mr-4">
+                <div class="card border-secondary mb-5">
+                        <div class="card-header bg-secondary border-0">
+                            <h6 class="font-weight-semi-bold m-0 " style="font-size: 20px;">Keranjang Anda</h6>
+                        </div>
+                        <div class="card-body">
+                            <?php if($this->cart->total_items() > 0){ foreach($cartItems as $item){ ?>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div>
+                                    <h6 class="my-0"><?php echo $item["name"]; ?></h6>
+                                    <small class="text-muted"><?php echo $item['price']*1000; ?>(<?php echo $item["qty"]; ?>)</small>
+                                </div>
+                                <span class="text-muted"><?php echo $item["subtotal"]*1000; ?></span>
+                            </li>
+                                        <?php } }else{ ?>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <p>No items in your cart...</p>
+                            </li>
+                            <?php } ?>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Total</span>
+                                <strong>Rp. <?php echo $this->cart->format_number($this->cart->total()*1000);?></strong>
+                            </li>
+                            <li class="list-group-item flex-row-reverse d-flex lh-condensed">
+                            <a class="btn btn-primary text-light" href="<?php echo site_url('home/produk');?>">Tambah Produk</a>
+                            </li>
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Cart End -->

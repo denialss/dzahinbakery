@@ -140,6 +140,17 @@ class Home extends CI_Controller{
 		redirect(base_url('home/cart'));
 	}
 
+	public function checkout(){
+		$id = $this->session->userdata('idUser');
+		$datawhere = array('idUser' => $id);
+		$data['profil'] = $this->Madmin->get_by_id('tbl_user', $datawhere)->row();
+	
+		$data['cartItems'] = $this->cart->contents();
+		$this->load->view('website/header');
+		$this->load->view('website/checkout', $data);
+		$this->load->view('website/footer');
+	}
+
 	public function profil(){
 			$id = $this->session->userdata('idUser');
 			$datawhere = array('idUser' => $id);
@@ -178,5 +189,12 @@ class Home extends CI_Controller{
 		  );
 		  $this->Madmin->update('tbl_user', $dataUpdate, 'idUser', $id);
 		  redirect('home');
+		}
+
+	public function pesanan(){
+		
+			$this->load->view('website/header');
+			$this->load->view('website/pesanan');
+			$this->load->view('website/footer');
 		}
 }
