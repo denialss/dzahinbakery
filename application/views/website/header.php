@@ -154,7 +154,7 @@
                           <use xlink:href="#cart"></use>
                         </svg>
                         <?php if ($this->cart->contents()){ ?>
-                        <span class="position-absolute translate-middle p-2 bg-danger border border-light rounded-circle">
+                        <span class="position-absolute translate-middle p-1 rounded-circle badge badge-secondary badge-pill text-dark"><?php echo $this->cart->total_items(); ?></span> 
                         <span class="visually-hidden">New alerts</span>
                         <?php }?>
                       </a>
