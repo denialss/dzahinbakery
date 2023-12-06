@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 04:45 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Dec 06, 2023 at 09:02 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -97,12 +97,12 @@ INSERT INTO `tbl_produk` (`idProduk`, `idKategori`, `foto`, `namaProduk`, `harga
 
 CREATE TABLE `tbl_user` (
   `idUser` int(5) NOT NULL,
-  `username` varchar(100) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `name` varchar(30) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `phone` varchar(15) DEFAULT NULL,
-  `address` varchar(50) DEFAULT NULL
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `address` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -110,29 +110,11 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`idUser`, `username`, `password`, `name`, `email`, `phone`, `address`) VALUES
-(2, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', 'user@gmail.com', '087765431234', 'Jalan Nusa Indah II');
+(1, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', 'user@gmail.com', '087612341234', 'Jalan Nusa Indah II');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `tbl_admin`
---
-ALTER TABLE `tbl_admin`
-  ADD PRIMARY KEY (`idAdmin`);
-
---
--- Indexes for table `tbl_kategori`
---
-ALTER TABLE `tbl_kategori`
-  ADD PRIMARY KEY (`idKategori`);
-
---
--- Indexes for table `tbl_produk`
---
-ALTER TABLE `tbl_produk`
-  ADD PRIMARY KEY (`idProduk`);
 
 --
 -- Indexes for table `tbl_user`
@@ -145,28 +127,10 @@ ALTER TABLE `tbl_user`
 --
 
 --
--- AUTO_INCREMENT for table `tbl_admin`
---
-ALTER TABLE `tbl_admin`
-  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `tbl_kategori`
---
-ALTER TABLE `tbl_kategori`
-  MODIFY `idKategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_produk`
---
-ALTER TABLE `tbl_produk`
-  MODIFY `idProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `idUser` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idUser` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
