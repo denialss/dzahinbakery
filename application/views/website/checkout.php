@@ -7,13 +7,47 @@
                             <h6 class="font-weight-semi-bold m-0 " style="font-size: 20px;">Alamat Pengiriman</h6>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex justify-content-left m-0 pt-1 align-middle">
-                                <h6 class="font-weight-medium">Jasa Pengiriman :</h6>
-                                <h6 class="font-weight-medium">Ambil di toko
+                            <div class=" m-2 align-middle">
+                                <h6 class="font-weight-medium">Nama Penerima :<?php echo $profil->name; ?></h6>
+                                <h6 class="font-weight-medium">Nomor Telepon :<?php echo $profil->phone; ?></h6>
+                                <h6 class="font-weight-medium">Alamat Penerima :<?php echo $profil->address; ?></h6>
+                                <!-- <h6 class="font-weight-medium">Ambil di toko
                                     <a href="#"  data-toggle="modal" data-target="#pengiriman">
                                         <span class="position-absolute translate-middle p-0 bg-white rounded-circle fa fa-info-circle"></span>
                                     </a>
-                                </h6>
+                                </h6> -->
+                            </div>
+                        </div>
+                        <div class="card-header bg-secondary border-0">
+                            <h6 class="font-weight-semi-bold m-0 " style="font-size: 20px;">Cek Ongkir Produk</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="justify-content-left m-0 pt-1 align-middle">
+                                <form method="post" name="pembayaran" action="<?php echo site_url('home/add_pesanan');?>">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Kota Asal</label>
+                                        <select class="form-control">
+                                            <option>ngentot</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Kota Tujuan</label>
+                                        <select class="form-control">
+                                            <option>ngentot</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Berat Produk</label>
+                                        <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ngentot">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Pilih Bang Kurir</label>
+                                        <select class="form-control">
+                                            <option>ngentot</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Cek Ongkir</button>
+                                </form>
                             </div>
                         </div>
                         <div class="card-header bg-secondary border-0">
