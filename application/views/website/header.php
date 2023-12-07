@@ -35,6 +35,7 @@
     <link href="<?php echo base_url('assets/user/lib/owlcarousel/assets/owl.carousel.min.css');?>" rel="stylesheet">
 
     <script src="<?php echo base_url('assets/user/js/modernizr.js');?>"></script>
+    
 </head>
 
 <body class="bg-body" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%"
