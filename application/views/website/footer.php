@@ -30,7 +30,7 @@
   <script type="text/javascript" src="<?php echo base_url('assets/user/js/bootstrap.bundle.min.js');?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/user/js/plugins.js');?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/user/js/script.js');?>"></script>
-  <script src="<?php echo base_url('assets/colorlib/js/bootstrap.min.js');?>"></script>
+  <script src="<?php echo base_url('assets/user/js/bootstrap.min.js');?>"></script>
 
     <!-- Shop Detail End -->
     <script src="<?php echo base_url('assets/user/lib/easing/easing.min.js');?>"></script>
@@ -42,12 +42,20 @@
 
     <!-- Template Javascript -->
     <script src="<?php echo base_url('assets/user/js/main.js');?>"></script>
-
-    <!-- Login -->
-    <script src="<?php echo base_url('assets/admin/js/login.js');?>"></script>
-
-    <!-- Sweet Alert
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    
+    <!-- Sweet Alert -->
+    <script>
+      <?php if ($this->session->flashdata('success_register')) { ?>
+        var isi = <?php echo json_encode($this->session->flashdata('success_register')) ?>;
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          text: isi,
+          title: 'success_register',
+        });
+      <?php } ?>
+    </script>
+    
 </body>
 
 </html>

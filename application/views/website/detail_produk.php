@@ -26,8 +26,8 @@
 
             <div class="col-lg-7 pb-5">
                 <h3 class="font-weight-semi-bold"><?php echo $produk->namaProduk; ?></h3>
-                <h3 class="font-weight-semi-bold"><?php echo $detailProduk->namaKategori; ?></h3>
-                <h3 class="font-weight-semi-bold mb-4"><?php echo $produk->harga; ?></h3>
+                <h3 class="font-weight-semi-bold" value="<?php echo $produk->idKategori; ?>"><?php echo $produk->namaKategori; ?></h3>
+                <h3 class="font-weight-semi-bold mb-4">Rp. <?php echo number_format($produk->harga, 0); ?></h3>
                 <p class="mb-4"><?php echo $produk->deskripsi_produk; ?></p>
 
 
@@ -35,13 +35,13 @@
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-minus">
-                                <i class="fa fa-minus"></i>
+                                <i class="bi bi-dash-lg"></i>
                             </button>
                         </div>
                         <input type="text" class="form-control bg-secondary text-center" value="1">
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-plus">
-                                <i class="fa fa-plus"></i>
+                                <i class="bi bi-plus-lg"></i>
                             </button>
                         </div>
                     </div>

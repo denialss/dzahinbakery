@@ -14,7 +14,7 @@
                       bahan-bahan berkualitas, setiap roti adalah perpaduan sempurna antara rasa dan tekstur. Mari
                       jelajahi dunia rasa yang tak terlupakan dan nikmati pengalaman menikmati roti terbaik bersama
                       kami.
-                      <p />
+                      </p>
                       <a href="<?php echo site_url('home/produk');?>" class="btn btn-medium btn-arrow position-relative mt-5">
                         <span class="text-uppercase">Produk</span>
                         <svg class="arrow-right position-absolute" width="18" height="20">
@@ -61,7 +61,7 @@
                       <a><?php echo $val->namaProduk; ?></a>
                     </h3>
                     <div class="cart-info">
-                      <a class="pseudo-text-effect" href="<?php echo site_url('home/add_cart/'. $val->idProduk);?>" data-after="ADD TO CART"><span>Rp. <?php echo $val->harga; ?></span></a>
+                      <a class="pseudo-text-effect" href="<?php echo site_url('home/add_cart/'. $val->idProduk);?>" data-after="ADD TO CART"><span>Rp. <?php echo number_format($val->harga, 0); ?></span></a>
                     </div>
                   </div>
                 </div>

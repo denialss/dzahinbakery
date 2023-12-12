@@ -34,7 +34,7 @@
                                 <a><?php echo $val->namaProduk; ?></a>
                             </h3>
                             <p><?php echo $val->namaKategori; ?></p>
-                            <p>Rp.<?php echo $val->harga; ?></p>
+                            <p>Rp. <?php echo number_format($val->harga, 0); ?></p>
                             <a href="<?php echo site_url('home/detail_produk/' . $val->idProduk);?>" class="btn btn-primary">Detail Produk</a>
                             <a href="<?php echo site_url('home/add_cart/'. $val->idProduk);?>" class="btn btn-primary">Add to Cart</a>
                         </div>

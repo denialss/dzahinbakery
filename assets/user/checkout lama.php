@@ -1,61 +1,10 @@
     <!-- Cart Start -->
     <div class="container-fluid pt-5">
         <div class="row px-xl-5 mt-4">
-            <div class="col-lg-4 table-responsive mb-5 overflow-hidden position-fixed end-0 top-0 mt-5 py-4 mr-4">
-                    <div class="card border-secondary mb-5">
-                            <div class="card-header bg-secondary border-0">
-                                <h6 class="font-weight-semi-bold m-0 " style="font-size: 20px;">Keranjang Anda</h6>
-                            </div>
-                            <div class="card-body">
-                                <?php if($this->cart->total_items() > 0){ 
-                                    $tot_berat = 0;
-
-                                    foreach($cartItems as $item){ 
-                                        $berat = $item['qty'] * $item['berat'];
-                                        $tot_berat = $tot_berat + $berat;
-                                    ?>
-                                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                    <div>
-                                        <h6 class="my-0"><?php echo $item["name"]; ?></h6>
-                                        <small class="text-muted">Rp. <?php echo $this->cart->format_number($item['price']);?> X <?php echo $item["qty"]; ?> (<?php echo $item["berat"]; ?> gram)</small>
-                                    </div>
-                                    <span class="text-muted">Rp. <?php echo $this->cart->format_number($item['subtotal']);?></span>
-                                </li>
-                                
-                                            <?php } }else{ ?>
-                                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                    <p>No items in your cart...</p>
-                                </li>
-                                <?php } ?>
-                                <br>
-                                    <div class="col-12 d-flex justify-content-between">
-                                        <span>Subtotal</span>
-                                        <strong>Rp. <?php echo $this->cart->format_number($this->cart->total());?></strong>
-                                    </div>
-                                    <div class="col-12 d-flex justify-content-between">
-                                        <span>Total Berat</span>
-                                        <span><?php echo $tot_berat; ?> gram</span>
-                                    </div>
-                                    <div class="col-12 d-flex justify-content-between">
-                                        <span>Biaya Pengiriman</span>
-                                        <strong id="ongkir"></strong>
-                                    </div>
-                                    <hr>
-                                    <div class="col-12 d-flex justify-content-between">
-                                        <span>Total</span>
-                                        <strong id="total_bayar"></strong>
-                                    </div>
-                            </div>
-                            
-                    </div>
-            </div>
             <div class="col-lg-8 table-responsive mb-5 overflow-hidden">
                 <div class="card border-secondary mb-5">
 
-                        <?php
-                        echo form_open_multipart('home/checkout_action');
-                        $noPesanan = date('Ymd') . strtoupper(random_string('alnum', 8));
-                        ?>
+                <form action="<?php echo site_url('home/add_pesanan');?>" method="post">
                         <div class="card-header bg-secondary border-0">
                             <h6 class="font-weight-semi-bold m-0 " style="font-size: 20px;">Alamat Pengiriman</h6>
                         </div>
@@ -63,27 +12,27 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group mb-3">
                                         <label>Nama Penerima</label>
-                                        <input name="name" class="form-control" type="text" value="<?php echo $profil->name; ?>" required='required'>
+                                        <input name="name" class="form-control" type="text" value="<?php echo $profil->name; ?>">
                                     </div>
                                     <div class="col-md-6 form-group mb-3">
                                         <label>Telepon</label>
-                                        <input name="phone" class="form-control" type="text" value="<?php echo $profil->phone; ?>" required='required'>
+                                        <input name="phone" class="form-control" type="text" value="<?php echo $profil->phone; ?>">
                                     </div>
                                     <div class="col-md-12 form-group mb-3">
                                         <label>Alamat</label>
-                                        <textarea rows="3" class="form-control" type="text" value="<?php echo $profil->address; ?>" required='required'></textarea>
+                                        <textarea rows="3" class="form-control" type="text" value="<?php echo $profil->address; ?>"></textarea>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label>Provinsi</label>
-                                                <select class="form-control" name="provinsi" required='required'></select> 
+                                                <select class="form-control" name="provinsi"></select> 
                                         </div>
                                         
                                     </div>
                                     <div class="col-md-6 form-group mb-3">
                                         <div class="form-group">
                                         <label>Kota/Kabupaten</label>
-                                            <select class="form-control" name="kota" required='required'></select> 
+                                            <select class="form-control" name="kota"></select> 
                                         </div>
                                     </div>
                                 </div>
@@ -95,11 +44,11 @@
                             <div class="row">
                                 <div class="col-md-6 form-group mb-3">
                                     <label>Jasa Pengiriman</label>
-                                        <select class="form-control" name="ekspedisi" required='required'></select>
+                                        <select class="form-control" name="ekspedisi"></select>
                                 </div>
                                 <div class="col-md-6 form-group mb-3">
                                     <label>Paket Ekspedisi</label>
-                                        <select name="paket" class="form-control" required='required'>
+                                        <select name="paket" class="form-control">
                                             <option value=""></option>
                                         </select>
                                 </div>
@@ -117,40 +66,65 @@
                             </div><br>
                             <div>
                                 <label for="formFile" class="form-label">Upload Bukti Pembayaran</label>
-                                    <input name="buktiPembayaran" class="form-control" type="file" id="formFile" required='required'>
-                                    <br>
-                                    <label>Atas Nama :</label>
-                                        <input name="namaPenerima" class="form-control" type="text" value="<?php echo $profil->name; ?>" required='required'>
+                                    <input class="form-control" type="file" id="formFile" required='required'>
                             </div>
                             <br>
-                            <!-- Simpan Transaksi -->
-                            <input name="noPesanan" value="<?= $noPesanan ?>" hidden>
-                            <input name="estimasi" hidden>
-                            <input name="ongkir" hidden>
-                            <input name="berat" value="<?= $tot_berat ?>" hidden><br>
-                            <input name="total_bayar" hidden>
-                            <!-- end Simpan Transaksi -->
-                            <!-- Simpan Rinci Transaksi -->
-                            <?php
-                            $i = 1;
-                            foreach ($this->cart->contents() as $items) {
-                                echo form_hidden('qty' . $i++, $items['qty']);
-                                echo form_hidden('name', $items['name']);
-                            }
-
-                            ?>
-                            <!-- end Simpan Rinci Transaksi -->
-                            <button type="submit" class="btn btn-block btn-primary my-3 py-3 text-light">Checkout</button>
+                            <a type="submit" class="btn btn-block btn-primary my-3 py-3 text-light" href="<?php echo site_url('home/checkout');?>">Checkout</a>
 
                         </div>
-                        <?php echo form_close() ?>
+                </form>
                 </div>
             </div>
+            <div class="col-lg-4 table-responsive mb-5 overflow-hidden position-fixed end-0 top-0 mt-5 py-4 mr-4">
+                <div class="card border-secondary mb-5">
+                        <div class="card-header bg-secondary border-0">
+                            <h6 class="font-weight-semi-bold m-0 " style="font-size: 20px;">Keranjang Anda</h6>
+                        </div>
+                        <div class="card-body">
+                            <?php if($this->cart->total_items() > 0){ 
+                                $tot_berat = 0;
 
+                                foreach($cartItems as $item){ 
+                                    $berat = $item['qty'] * $item['berat'];
+                                    $tot_berat = $tot_berat + $berat;
+                                ?>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div>
+                                    <h6 class="my-0"><?php echo $item["name"]; ?></h6>
+                                    <small class="text-muted">Rp. <?php echo $this->cart->format_number($item['price']);?> X <?php echo $item["qty"]; ?> (<?php echo $item["berat"]; ?> gram)</small>
+                                </div>
+                                <span class="text-muted">Rp. <?php echo $this->cart->format_number($item['subtotal']);?></span>
+                            </li>
+                            
+                                        <?php } }else{ ?>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <p>No items in your cart...</p>
+                            </li>
+                            <?php } ?>
+                            <br>
+                                <div class="col-12 d-flex justify-content-between">
+                                    <span>Subtotal</span>
+                                    <strong>Rp. <?php echo $this->cart->format_number($this->cart->total());?></strong>
+                                </div>
+                                <div class="col-12 d-flex justify-content-between">
+                                    <span>Total Berat</span>
+                                    <span><?php echo $tot_berat; ?> gram</span>
+                                </div>
+                                <div class="col-12 d-flex justify-content-between">
+                                    <span>Biaya Pengiriman</span>
+                                    <strong id="ongkir"></strong>
+                                </div>
+                                <hr>
+                                <div class="col-12 d-flex justify-content-between">
+                                    <span>Total</span>
+                                    <strong id="total_bayar"></strong>
+                                </div>
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Cart End -->
-
 
     <!-- BCA -->
     <div class="modal fade" id="bca" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -204,6 +178,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary text-light" href="">Lanjutkan</a>
+                </div>
             </div>
         </div>
     </div>
@@ -231,6 +208,9 @@
                         <h6>6. Pastikan nomor dan jumlah transfer sudah sesuai</h6>
                         <h6>7. Tap 'Bayar'</h6>
                         <h6>8. Masukkan PIN DANA</h6>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary text-light" href="">Lanjutkan</a>
                 </div>
             </div>
         </div>
@@ -260,6 +240,9 @@
                         <h6>7. Tekan Confirm & Pay untuk melanjutkan.</h6>
                         <h6>8. Masukkan PIN GoPay kamu.</h6>
                 </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary text-light" href="">Lanjutkan</a>
+                </div>
             </div>
         </div>
     </div>
@@ -276,7 +259,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <h6 style="font-size: 20px;">Mohon maaf, saat ini pembayaran menggunakan qris belum tersedia.</h6>
+                <h6 style="font-size: 20px;">Mohon maaf, saat ini pembayaran menggunakan qris tidak dapat dilakukan.</h6>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary text-light" href="">Lanjutkan</a>
                 </div>
             </div>
         </div>

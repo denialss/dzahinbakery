@@ -1,5 +1,4 @@
 <?php 
- 
 class Home extends CI_Controller{
  
 	function __construct(){
@@ -60,6 +59,9 @@ class Home extends CI_Controller{
 		  );
 		  $this->Madmin->insert('tbl_user', $dataInput);
 		  redirect('home');
+			$this->session->set_flashdata('success_register', 'Berhasil melakukan registrasi');
+        //   $this->session->set_flashdata('success_register', 'Berhasil melakukan registrasi');
+		  
 		}
 
 	public function logout()
@@ -77,8 +79,8 @@ class Home extends CI_Controller{
 
 	public function detail_produk($idProduk){
         	$dataWhere = array('idProduk' => $idProduk);
-			$data['produk'] = $this->Madmin->get_by_id('tbl_produk', $dataWhere)->row_object();
-        	$data['detailProduk'] = $this->Madmin->tampilJoin()->row_object();
+			$data['detailProduk'] = $this->Madmin->get_by_id('tbl_produk', $dataWhere)->row_object();
+        	$data['produk'] = $this->Madmin->tampilJoin()->row_object();
 			$this->load->view('website/header');
 			$this->load->view('website/detail_produk', $data);
 			$this->load->view('website/footer');
@@ -112,6 +114,7 @@ class Home extends CI_Controller{
 			'image' => $produk->foto,
 			'name' => $produk->namaProduk,
 			'price' => $produk->harga,
+			'berat' => $produk->berat,
 			'qty' => 1
 			);
 			$this->cart->insert($data);
@@ -119,13 +122,13 @@ class Home extends CI_Controller{
 			redirect(base_url($redirect_page, 'refresh'));
 		}
 
-	public function update_cart($rowid)
+	public function update_cart()
 		{
 			$i = 1;
 			foreach ($this->cart->contents() as $item){
 				$dataUpdate = array(
 					'rowid' => $item['rowid'],
-					'qty' => $this->input->post($i . ['qty']),
+					'qty' => $this->input->post('qty'),
 				);
 	
 				$this->cart->update($dataUpdate);
@@ -148,7 +151,49 @@ class Home extends CI_Controller{
 		$data['cartItems'] = $this->cart->contents();
 		$this->load->view('website/header');
 		$this->load->view('website/checkout', $data);
-		$this->load->view('website/footer');
+		$this->load->view('website/footer', $data);
+	}
+
+	public function checkout_action(){
+
+		// BELOM SELESAI INI!!
+		
+		//simpan ke tabel transaksi
+		$data = array(
+			'idUser' => $this->session->userdata('idUser'),
+			'noPesanan' => $this->input->post('noPesanan'),
+			'tglPesanan' => date('Y-m-d'),
+			'namaPenerima' => $this->input->post('namaPenerima'),
+			'noPenerima' => $this->input->post('noPenerima'),
+			'provinsi' => $this->input->post('provinsi'),
+			'kota' => $this->input->post('kota'),
+			'alamat' => $this->input->post('alamat'),
+			'ekspedisi' => $this->input->post('ekspedisi'),
+			'paket' => $this->input->post('paket'),
+			'estimasi' => $this->input->post('estimasi'),
+			'ongkir' => $this->input->post('ongkir'),
+			'berat' => $this->input->post('berat'),
+			'total_bayar' => $this->input->post('total_bayar'),
+			'statusPembayaran' => '1',
+			'statusPesanan' => '0',
+		);
+		$this->Madmin->simpan_transaksi($data);
+		//simpan ke tabel rinci transaksi
+		$i = 1;
+		foreach ($this->cart->contents() as $items) {
+			$data_rinci = array(
+				'noPesanan' => $this->input->post('noPesanan'),
+				'idProduk' => $items['id'],
+				'qty' => $this->input->post('qty' . $i++),
+				'nama_barang' => $items['name'],
+			);
+			$this->Madmin->simpan_rinci_transaksi($data_rinci);
+		}
+
+		//=========================================
+		$this->session->set_flashdata('pesan', 'Pesanan Berhasil Di Proses !!!');
+		$this->cart->destroy();
+		redirect('home/pesanan');
 	}
 
 	public function profil(){

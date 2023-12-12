@@ -27,8 +27,8 @@
       <title>Dashboard Admin | Dzahin Bakery</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="<?php echo base_url('assets/admin/vendors/bootstrap/css/bootstrap.min.css');?>">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="<?php echo base_url('assets/admin/vendors/font-awesome/css/font-awesome.min.css');?>">
+        <!-- BootStrap Icon -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
         <!-- NProgress -->
         <link rel="stylesheet" href="<?php echo base_url('assets/admin/vendors/nprogress/nprogress.css');?>">
         <!-- iCheck -->
@@ -44,6 +44,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/admin/build/css/custom.min.css');?>">
 
         <link rel="stylesheet" href="<?php echo base_url('assets/admin/build/css/style.css');?>">
+        
         
   </head>
 
@@ -76,11 +77,11 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo site_url('admin');?>"><i class="fa fa-home"></i> Dashboard </a></li>
-                  <li><a href="<?php echo site_url('admin/produk');?>"><i class="fa fa-archive"></i> Produk </a></li>
-                  <li><a href="<?php echo site_url('admin/kategori');?>"><i class="fa fa-tags"></i> Kategori </a></li>
-                  <li><a href="<?php echo site_url('admin/pesanan');?>"><i class="fa fa-shopping-cart"></i> Pesanan </a></li>
-                  <li><a href="<?php echo site_url('admin/penjualan');?>"><i class="fa fa-bar-chart"></i> Laporan Penjualan </a></li>
+                  <li><a href="<?php echo site_url('admin');?>"><i class="bi bi-house-fill h5"></i> Dashboard </a></li>
+                  <li><a href="<?php echo site_url('admin/produk');?>"><i class="bi bi-archive-fill h5"></i> Produk </a></li>
+                  <li><a href="<?php echo site_url('admin/kategori');?>"><i class="bi bi-tags-fill h5"></i> Kategori </a></li>
+                  <li><a href="<?php echo site_url('admin/pesanan');?>"><i class="bi bi-cart-fill h5"></i> Pesanan </a></li>
+                  <li><a href="<?php echo site_url('admin/penjualan');?>"><i class="bi bi-bar-chart-line-fill h5"></i> Laporan Penjualan </a></li>
                 </ul>
               </div>
 

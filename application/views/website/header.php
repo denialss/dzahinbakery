@@ -24,8 +24,8 @@
     <!-- Cart -->
     <link href="<?php echo base_url('assets/user/css/style_cart.css');?>" rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
     
 	<!-- Logo Favicon -->
@@ -35,6 +35,10 @@
     <link href="<?php echo base_url('assets/user/lib/owlcarousel/assets/owl.carousel.min.css');?>" rel="stylesheet">
 
     <script src="<?php echo base_url('assets/user/js/modernizr.js');?>"></script>
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body class="bg-body" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%"
@@ -139,7 +143,7 @@
 
               <?php if (empty($this->session->userdata('User'))) { ?>
               <li class="nav-item">
-                <a type="button" data-toggle="modal"  data-target="#loginform" class="btn btn-primary" >LOGIN</a>
+                <a type="button" data-toggle="modal" data-target="#loginform" class="btn btn-primary">LOGIN</a>
               </li>
               <?php } else {?>
 
@@ -178,28 +182,18 @@
                           <a href="<?php echo site_url('home/logout');?>" class="dropdown-item item-anchor">Logout</a>
                         </li>
                       </ul>
-
                     </li>
-                    <?= $this->session->flashdata('success_login');?>
-                    <?= $this->session->flashdata('success_register');?>
-                    <?= $this->session->flashdata('success_logout');?>
-                    <?= $this->session->flashdata('add_cart');?>
-                    <?= $this->session->flashdata('error_cart');?>
-                    <?= $this->session->flashdata('error_login');?>
                   </ul>
                 </div>
               </li>
               <?php } ?>
             </ul>
-
-
-
           </div>
         </div>
       </div>
     </nav>
           <!-- Modal Login-->
-          <div class="modal fade" id="loginform" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal fade" id="loginform" data-keyboard="false" role="dialog" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-body">
@@ -210,21 +204,15 @@
                             <form action="<?php echo site_url('home/login_action'); ?>" method="post" id="login" autocomplete="off">
                               <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
                                 </div>
                                 <input name="username" type="text" value="" class="form-control" placeholder="username" aria-label="Username" aria-describedby="basic-addon1" />
                               </div>
                               <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+                                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-key-fill"></i></span>
                                 </div>
-                                <input name="password" type="password" value="" class="form-control" id="password" placeholder="password" required="true" aria-label="password" aria-describedby="basic-addon1" />
-                                <div class="input-group-append">
-                                  <span class="input-group-text" onclick="password_show_hide();">
-                                    <i class="fas fa-eye" id="show_eye"></i>
-                                    <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
-                                  </span>
-                                </div>
+                                <input name="password" type="password" class="form-control" required="true" placeholder="password" aria-label="password" aria-describedby="basic-addon1" />
                               </div>
                                 <div class="row">
                                   <div class="col-6">
@@ -265,13 +253,13 @@
                             <form action="<?php echo site_url('home/register_action'); ?>" method="post" id="register" autocomplete="off">
                               <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
                                 </div>
                                 <input name="username" type="text" value="" class="form-control" placeholder="username" aria-label="Username" required="true" aria-describedby="basic-addon1" />
                               </div>
                               <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+                                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-key-fill"></i></span>
                                 </div>
                                 <input name="password" type="password" value="" class="form-control" id="password" placeholder="password" required="true" aria-label="password" aria-describedby="basic-addon1" />
                               </div>
@@ -279,13 +267,13 @@
                                   <div class="col-6 text-start">
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
                                       </div>
                                       <input name="name" type="text" value="" class="form-control" placeholder="nama" aria-label="Username" required="true" aria-describedby="basic-addon1" />
                                     </div>
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
+                                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-fill"></i></span>
                                       </div>
                                       <input name="email" type="text" value="" class="form-control" placeholder="email" aria-label="Username" required="true" aria-describedby="basic-addon1" />
                                     </div>
@@ -294,13 +282,13 @@
                                 <div class="col-6 text-end">
                                   <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
+                                      <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone-fill"></i></span>
                                     </div>
                                     <input name="phone" type="text" value="" class="form-control" placeholder="nomor telepon" aria-label="Username" required="true" aria-describedby="basic-addon1" />
                                   </div>
                                   <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon1"><i class="fas fa-map"></i></span>
+                                      <span class="input-group-text" id="basic-addon1"><i class="bi bi-map-fill"></i></span>
                                     </div>
                                     <input name="address" type="text" value="" class="form-control" placeholder="alamat" aria-label="Username" required="true" aria-describedby="basic-addon1" />
                                   </div>

@@ -2,7 +2,7 @@
 <div class="top_nav fixed-top">
           <div class="nav_menu">
               <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                <a id="menu_toggle"><i class="bi bi-list h5"></i></a>
               </div>
               <nav class="nav navbar-nav">
               <ul class=" navbar-right">
@@ -11,19 +11,17 @@
                     <img src="<?php echo base_url('assets/img/profiladmin.jpg');?>" alt=""><b style="font-size:15px;"><?=$this->session->userdata('username')?></b>
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item"  href="javascript:;"> Profile</a>
-                    <a class="dropdown-item"  href="<?php echo site_url('settings');?>">
-                      <span class="badge bg-red pull-right">50%</span>
-                      <span>Settings</span>
+                    <a class="dropdown-item"  href="<?php echo site_url('admin/settings');?>"><i class="bi bi-person-fill"></i>
+                    <span>Profile</span>
+                    <a class="dropdown-item"  href="<?php echo site_url('admin/logout');?>"><i class="bi bi-box-arrow-right"></i>
+                    <span>Log out</span>
                     </a>
-                    
-                    <a class="dropdown-item"  href="<?php echo site_url('admin/logout');?>"><i class="fa fa-sign-out"> Log out</i></a>
                   </div>
                 </li>
 
                 <li role="presentation" class="nav-item dropdown open">
                   <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
+                    <i class="bi bi-envelope-open-fill h5"></i>
                     <span class="badge bg-green">6</span>
                   </a>
                   <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
