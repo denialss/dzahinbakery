@@ -132,21 +132,16 @@
                                                                 <div class="form-group">
                                                                     <input type="hidden" name="idProduk" value="<?php echo $val->idProduk; ?>">
                                                                     <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Masukkan Foto Baru :</label>
-                                                                    <div class="row justify-content-center">
-                                                                        <div class="form-group">
-                                                                            <img src="<?php echo base_url()?>upload/<?=$val->foto?>" width="100px">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <input type="file" class="form-control" name="foto" required="required">
+                                                                    <div class="form-group">
+                                                                        <input type="file" class="form-control" name="foto" required='required'>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Kategori :</label>
-                                                                        <select class="custom-select" id="inputGroupSelect02" name="idKategori" required="required">
-                                                                            <option><?php echo $val->namaKategori; ?></option>
+                                                                        <select class="custom-select" id="inputGroupSelect02" name="idKategori" required='required'>
+                                                                            <option value="<?php echo $val->idKategori; ?>"><?php echo $val->namaKategori; ?></option>
                                                                             <?php foreach ($kategori as $var) { ?>
-                                                                                <option name="idKategori" value="<?php echo $var->idKategori; ?>"><?php echo $var->namaKategori; ?></option>
+                                                                                <option value="<?php echo $var->idKategori; ?>"><?php echo $var->namaKategori; ?></option>
                                                                             <?php } ?>
                                                                         </select>
                                                                 </div>
@@ -160,7 +155,7 @@
                                                                 <div class="form-group">
                                                                 <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Stok Tersedia :</label>
                                                                     <div class="custom-file">
-                                                                    <input type="text" name="stok" class="form-control" value="<?php echo $val->stok; ?>" id="recipient-name">
+                                                                    <input type="number" name="stok" class="form-control" value="<?php echo $val->stok; ?>" id="recipient-name">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -172,7 +167,7 @@
                                                                 <div class="form-group">
                                                                 <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Harga :</label>
                                                                     <div class="custom-file">
-                                                                    <input type="text" name="harga" class="form-control" value="<?php echo $val->harga; ?>" id="recipient-name">
+                                                                    <input type="number" name="harga" class="form-control" value="<?php echo $val->harga; ?>" id="recipient-name">
                                                                     </div>
                                                                 </div>
                                                                     <div class="form-group">
@@ -217,13 +212,13 @@
                                                         <img src="<?php echo base_url('assets/img/no-image.png');?>" id="gambar_load" width="100px">
                                                     </div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <input class="form-control" name="foto" id="preview_gambar" type="file" required="required">
+                                                <div class="form-group">
+                                                    <input class="form-control" name="foto" id="preview_gambar" type="file" required='required'>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Kategori :</label>
-                                                    <select class="custom-select" id="inputGroupSelect02" name="idKategori" required="required">
+                                                    <select class="custom-select" id="inputGroupSelect02" name="idKategori" required='required'>
                                                         <option>-- Pilih kategori --</option>
                                                         <?php foreach ($kategori as $val) { ?>
                                                             <option value="<?php echo $val->idKategori; ?>"><?php echo $val->namaKategori; ?></option>
@@ -233,30 +228,30 @@
                                             <div class="form-group">
                                             <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Nama Produk :</label>
                                                 <div class="custom-file">
-                                                    <input type="text" name="namaProduk" class="form-control" id="recipient-name" required="required">
+                                                    <input type="text" name="namaProduk" class="form-control" id="recipient-name" required='required'>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                             <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Stok Tersedia :</label>
                                                 <div class="custom-file">
-                                                    <input type="text" name="stok" class="form-control" id="recipient-name" required="required">
+                                                    <input type="number" name="stok" class="form-control" id="recipient-name" required='required'>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Berat (Gr) :</label>
                                                 <div class="custom-file">
-                                                    <input type="number" name="berat" min="0" class="form-control" id="recipient-name" required="required">
+                                                    <input type="number" name="berat" min="0" class="form-control" id="recipient-name" required='required'>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                             <label for="recipient-name" class="col-form-label label-align-left" style="font-size:15px;">Harga :</label>
                                                 <div class="custom-file">
-                                                    <input type="text" name="harga" class="form-control" id="recipient-name" required="required">
+                                                    <input type="number" name="harga" class="form-control" id="recipient-name" required='required'>
                                                 </div>
                                             </div>
                                                 <div class="form-group">
                                                     <label for="message-text" class="col-form-label label-align-left" style="font-size:15px;">Deskripsi Produk :</label>
-                                                    <textarea name="deskripsi_produk" class="form-control" id="message-text" required="required"></textarea>
+                                                    <textarea name="deskripsi_produk" class="form-control" id="message-text" required='required'></textarea>
                                                 </div>
                                     </div>
                                     <div class="modal-footer">
@@ -284,3 +279,21 @@
         </div>
     </div>
 </div>
+
+    <!-- Preview Gambar -->
+    <script>
+      function bacaGambar(input){
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $('#gambar_load') .attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      $("#preview_gambar").change(function(){
+        bacaGambar(this);
+      });
+    </script>
+     <!-- /Preview Gambar -->

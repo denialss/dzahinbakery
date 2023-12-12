@@ -32,13 +32,13 @@
                                           </td>
                                           <td class="align-middle">
                                             <div class="btn-group">
-                                              <button  type="button" class="btn btn-success text-light" title="Lihat Detail Produk" data-toggle="modal"  data-target="#daftarproduk<?php echo $val->idKategori ?>">
+                                              <button  type="button" class="btn btn-success text-light" title="Lihat Detail Produk" data-toggle="modal"  data-target="#daftarproduk<?php echo $val->idKategori ?>" disabled>
                                                 <i class="bi bi-eye-fill"></i>
                                               </button>
                                               <a type="button" class="btn btn-warning text-light" title="Edit Produk" data-toggle="modal"  data-target="#editkategori<?php echo $val->idKategori ?>">
                                                 <i class="bi bi-pencil-square"></i>
                                               </a>
-                                              <a type="button" class="btn btn-danger" title="Delete Produk" class="btn-danger" href="<?php echo site_url('admin/delete_produk/' . $val->idKategori); ?>" onclick="return confirm('Yakin Akan Hapus Data Ini?')">
+                                              <a type="button" class="btn btn-danger" title="Delete Produk" class="btn-danger" href="<?php echo site_url('admin/delete_kategori/' . $val->idKategori); ?>" onclick="return confirm('Yakin Akan Hapus Data Ini?')">
                                                 <i class="bi bi-trash"></i>
                                               </a>
                                             </div>

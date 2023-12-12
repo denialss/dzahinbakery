@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2023 at 10:41 AM
+-- Generation Time: Dec 13, 2023 at 12:31 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dzahinbakery`
+-- Database: `hasa`
 --
 
 -- --------------------------------------------------------
@@ -50,7 +50,8 @@ CREATE TABLE `tbl_detail_transaksi` (
   `idDetail` int(11) NOT NULL,
   `noPesanan` int(25) NOT NULL,
   `idProduk` int(11) NOT NULL,
-  `qty` int(11) NOT NULL
+  `qty` int(11) NOT NULL,
+  `namaProduk` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -63,16 +64,6 @@ CREATE TABLE `tbl_kategori` (
   `idKategori` int(11) NOT NULL,
   `namaKategori` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_kategori`
---
-
-INSERT INTO `tbl_kategori` (`idKategori`, `namaKategori`) VALUES
-(1, 'Kue Kering'),
-(2, 'Kue Basah'),
-(3, 'Za'),
-(4, 'asd');
 
 -- --------------------------------------------------------
 
@@ -90,17 +81,6 @@ CREATE TABLE `tbl_produk` (
   `berat` int(11) NOT NULL,
   `deskripsi_produk` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_produk`
---
-
-INSERT INTO `tbl_produk` (`idProduk`, `idKategori`, `foto`, `namaProduk`, `harga`, `stok`, `berat`, `deskripsi_produk`) VALUES
-(1, 1, 'roti_meses8.jpg', 'Donat', '5.000', 0, 0, 'Kudapan manis dengan perpaduan sempurna antara tekstur lembut dan empuk, serta aroma yang menggugah selera.'),
-(16, 1, 'roti_blueberry3.jpg', 'Cream Bun', '5000', 11, 100, 'awds'),
-(18, 2, 'Roti_coklat_keju4.jpg', 'Roti Coklat', '123', 30, 123, 'asdas'),
-(19, 4, 'Roti_coklat_keju6.jpg', 'Cream Bun', '4000', 11, 12322, 'asd'),
-(20, 1, 'cream-bun5.jpg', 'Donat Gula Halusa', '10000', 152, 123333, '436dsf');
 
 -- --------------------------------------------------------
 
@@ -131,7 +111,8 @@ INSERT INTO `tbl_toko` (`idToko`, `namaToko`, `telepon`, `alamat`, `lokasi`) VAL
 
 CREATE TABLE `tbl_transaksi` (
   `idTransaksi` int(11) NOT NULL,
-  `noPesanan` varchar(255) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `noPesanan` varchar(25) NOT NULL,
   `tglPesanan` date DEFAULT NULL,
   `namaPenerima` varchar(30) NOT NULL,
   `noPenerima` int(15) NOT NULL,
@@ -166,24 +147,6 @@ CREATE TABLE `tbl_user` (
   `phone` varchar(15) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_user`
---
-
-INSERT INTO `tbl_user` (`idUser`, `username`, `password`, `name`, `email`, `phone`, `address`) VALUES
-(2, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', 'user@gmail.com', '087765431234', 'Jalan Nusa Indah II'),
-(3, 'arbi', '9e4b7b4b8aee0e53dc7fe3bd7ceffdb7', 'arbi', 'arbi', '0970780', 'arbi'),
-(4, 'juan', 'a94652aa97c7211ba8954dd15a3cf838', 'juan', 'juan', '091203190', 'Jalan'),
-(5, 'uu', '6277e2a7446059985dc9bcf0a4ac1a8f', 'uu', 'uu', '019230123', 'uu'),
-(6, 'uu', '6277e2a7446059985dc9bcf0a4ac1a8f', 'uu', 'uu', '019230123', 'uu'),
-(7, 'uu', '6277e2a7446059985dc9bcf0a4ac1a8f', 'uu', 'uu', '019230123', 'uu'),
-(8, 'uu', '6277e2a7446059985dc9bcf0a4ac1a8f', 'uu', 'uu', '019230123', 'uu'),
-(9, 'uu', '6277e2a7446059985dc9bcf0a4ac1a8f', 'uu', 'uu', '019230123', 'uu'),
-(10, 'ie', '25400724d7370b0b29c9369d9af3dd21', 'ie', 'ie', '021312093712', 'ie'),
-(11, 'ie', '25400724d7370b0b29c9369d9af3dd21', 'ie', 'ie', '021312093712', 'ie'),
-(12, 'lokasi', '7d5f30ab39191d89007d0264ae6db6b2', 'lokasi', 'lokasi', '123', 'lokasi'),
-(13, 'jing', '43ae0add70fd1bda16d0700282cd8d2d', 'jing', 'jing', '123123', 'asd');
 
 --
 -- Indexes for dumped tables
@@ -252,13 +215,13 @@ ALTER TABLE `tbl_detail_transaksi`
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `idKategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idKategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
-  MODIFY `idProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tbl_toko`
@@ -270,13 +233,13 @@ ALTER TABLE `tbl_toko`
 -- AUTO_INCREMENT for table `tbl_transaksi`
 --
 ALTER TABLE `tbl_transaksi`
-  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `idUser` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idUser` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables

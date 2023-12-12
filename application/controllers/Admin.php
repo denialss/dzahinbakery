@@ -182,9 +182,11 @@ class Admin extends CI_Controller
     // /Olah Data Kategori --------------------------------------------------------------------
 
   public function pesanan(){
+        $data['pesanan'] = $this->Madmin->get_all_data('tbl_transaksi')->result();
+
         $this->load->view('admin/sidebar');
         $this->load->view('admin/menu');
-        $this->load->view('admin/pesanan');
+        $this->load->view('admin/pesanan', $data);
         $this->load->view('admin/footer');
     }
 

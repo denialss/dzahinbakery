@@ -275,7 +275,7 @@
                                       <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-fill"></i></span>
                                       </div>
-                                      <input name="email" type="text" value="" class="form-control" placeholder="email" aria-label="Username" required="true" aria-describedby="basic-addon1" />
+                                      <input name="email" type="email" value="" class="form-control" placeholder="email" aria-label="Username" required="true" aria-describedby="basic-addon1" />
                                     </div>
                                   </div>
                                 

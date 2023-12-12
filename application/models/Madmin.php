@@ -86,18 +86,35 @@ class Madmin extends CI_Model
 		$this->db->insert('tbl_detail_transaksi', $data_rinci);
 	}
 
-  public function edit_produk_action($pk, $id, $dataproduk_Update, $datafoto_Update)
+  public function transaksi()
 	{
-		$this->db->where($pk, $id);
-		$this->db->set($data_produk);
-		$this->db->update('tbl_produk', $dataproduk_Update);
-
-		$where  = array('idProduk' => $datafoto_Update['idProduk']);
-
-		$this->db->where($where);
-		$this->db->update('tbl_foto', $datafoto_Update);
-
-		$this->db->where($where);
-		return $this->db->get('tbl_foto')->row()->stid;
+		$this->db->select('*');
+		$this->db->from('tbl_transaksi');
+		$this->db->where('idUser', $this->session->userdata('idUser'));
+		$this->db->where('statusPesanan=0');
+		$this->db->order_by('idTransaksi', 'desc');
+		return $this->db->get()->result();
 	}
+
+  public function detail_transaksi($idTransaksi)
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_transaksi');
+		$this->db->where('id_transaksi', $idTransaksi);
+		return $this->db->get()->row();
+	}
+
+	//fungsi memanggil detail barang per transaksi
+	public function detail_transaksi_produk($idTransaksi)
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_rinci_transaksi');
+		$this->db->join('tbl_transaksi', 'tbl_transaksi.no_order = tbl_rinci_transaksi.no_order', 'left');
+		$this->db->join('tbl_barang', 'tbl_barang.id_barang = tbl_rinci_transaksi.id_barang', 'left');
+		$this->db->where('id_transaksi', $idTransaksi);
+		return $this->db->get()->result();
+	}
+
+
+
 }

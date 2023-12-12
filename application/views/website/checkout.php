@@ -63,15 +63,15 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group mb-3">
                                         <label>Nama Penerima</label>
-                                        <input name="name" class="form-control" type="text" value="<?php echo $profil->name; ?>" required='required'>
+                                        <input name="namaPenerima" class="form-control" type="text" value="<?php echo $profil->name; ?>" required='required'>
                                     </div>
                                     <div class="col-md-6 form-group mb-3">
                                         <label>Telepon</label>
-                                        <input name="phone" class="form-control" type="text" value="<?php echo $profil->phone; ?>" required='required'>
+                                        <input name="noPenerima" class="form-control" type="text" value="<?php echo $profil->phone; ?>" required='required'>
                                     </div>
                                     <div class="col-md-12 form-group mb-3">
-                                        <label>Alamat</label>
-                                        <textarea rows="3" class="form-control" type="text" value="<?php echo $profil->address; ?>" required='required'></textarea>
+                                        <label for="alamatuhuy">Alamat</label>
+                                        <textarea name="alamat" rows="3" class="form-control" id="alamatuhuy" type="text" value="<?php echo $profil->address; ?>" required='required'></textarea>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
@@ -120,14 +120,14 @@
                                     <input name="buktiPembayaran" class="form-control" type="file" id="formFile" required='required'>
                                     <br>
                                     <label>Atas Nama :</label>
-                                        <input name="namaPenerima" class="form-control" type="text" value="<?php echo $profil->name; ?>" required='required'>
+                                        <input name="atasNama" class="form-control" type="text" value="<?php echo $profil->name; ?>" required='required'>
                             </div>
                             <br>
                             <!-- Simpan Transaksi -->
                             <input name="noPesanan" value="<?= $noPesanan ?>" hidden>
                             <input name="estimasi" hidden>
                             <input name="ongkir" hidden>
-                            <input name="berat" value="<?= $tot_berat ?>" hidden><br>
+                            <input name="berat" value="<?= $tot_berat ?>" hidden>
                             <input name="total_bayar" hidden>
                             <!-- end Simpan Transaksi -->
                             <!-- Simpan Rinci Transaksi -->

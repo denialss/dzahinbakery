@@ -157,43 +157,49 @@ class Home extends CI_Controller{
 	public function checkout_action(){
 
 		// BELOM SELESAI INI!!
-		
-		//simpan ke tabel transaksi
-		$data = array(
-			'idUser' => $this->session->userdata('idUser'),
-			'noPesanan' => $this->input->post('noPesanan'),
-			'tglPesanan' => date('Y-m-d'),
-			'namaPenerima' => $this->input->post('namaPenerima'),
-			'noPenerima' => $this->input->post('noPenerima'),
-			'provinsi' => $this->input->post('provinsi'),
-			'kota' => $this->input->post('kota'),
-			'alamat' => $this->input->post('alamat'),
-			'ekspedisi' => $this->input->post('ekspedisi'),
-			'paket' => $this->input->post('paket'),
-			'estimasi' => $this->input->post('estimasi'),
-			'ongkir' => $this->input->post('ongkir'),
-			'berat' => $this->input->post('berat'),
-			'total_bayar' => $this->input->post('total_bayar'),
-			'statusPembayaran' => '1',
-			'statusPesanan' => '0',
-		);
-		$this->Madmin->simpan_transaksi($data);
-		//simpan ke tabel rinci transaksi
-		$i = 1;
-		foreach ($this->cart->contents() as $items) {
-			$data_rinci = array(
+		$config['upload_path'] = './upload/bukti_pembayaran/';
+        $config['allowed_types'] = 'jpg|png|jpeg';
+        $this->load->library('upload', $config);
+        
+        if ($this->upload->do_upload('buktiPembayaran')) {
+			$data_file = $this->upload->data();
+			$data = array(
+				'idUser' => $this->session->userdata('idUser'),
 				'noPesanan' => $this->input->post('noPesanan'),
-				'idProduk' => $items['id'],
-				'qty' => $this->input->post('qty' . $i++),
-				'nama_barang' => $items['name'],
+				'tglPesanan' => date('Y-m-d'),
+				'namaPenerima' => $this->input->post('namaPenerima'),
+				'noPenerima' => $this->input->post('noPenerima'),
+				'provinsi' => $this->input->post('provinsi'),
+				'kota' => $this->input->post('kota'),
+				'alamat' => $this->input->post('alamat'),
+				'ekspedisi' => $this->input->post('ekspedisi'),
+				'paket' => $this->input->post('paket'),
+				'estimasi' => $this->input->post('estimasi'),
+				'ongkir' => $this->input->post('ongkir'),
+				'berat' => $this->input->post('berat'),
+				'buktiPembayaran' => $data_file['file_name'],
+				'total_bayar' => $this->input->post('total_bayar'),
+				'statusPembayaran' => '1',
+				'statusPesanan' => '0',
 			);
-			$this->Madmin->simpan_rinci_transaksi($data_rinci);
+			
+				$this->Madmin->simpan_transaksi($data);
+				//simpan ke tabel rinci transaksi
+				$i = 1;
+				foreach ($this->cart->contents() as $items) {
+					$data_rinci = array(
+						'noPesanan' => $this->input->post('noPesanan'),
+						'idProduk' => $items['id'],
+						'qty' => $this->input->post('qty' . $i++),
+						'namaProduk' => $items['name'],
+					);
+					$this->Madmin->simpan_rinci_transaksi($data_rinci);
+			//=========================================
+			$this->session->set_flashdata('pesan', 'Pesanan Berhasil Di Proses !!!');
+			$this->cart->destroy();
+			redirect('home/pesanan');
+			}
 		}
-
-		//=========================================
-		$this->session->set_flashdata('pesan', 'Pesanan Berhasil Di Proses !!!');
-		$this->cart->destroy();
-		redirect('home/pesanan');
 	}
 
 	public function profil(){
@@ -237,9 +243,10 @@ class Home extends CI_Controller{
 		}
 
 	public function pesanan(){
-		
+			$data['pesanan'] = $this->Madmin->transaksi();
+
 			$this->load->view('website/header');
-			$this->load->view('website/pesanan');
+			$this->load->view('website/pesanan', $data);
 			$this->load->view('website/footer');
 		}
 }

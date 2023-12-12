@@ -44,6 +44,9 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/admin/build/css/custom.min.css');?>">
 
         <link rel="stylesheet" href="<?php echo base_url('assets/admin/build/css/style.css');?>">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
         
         
   </head>

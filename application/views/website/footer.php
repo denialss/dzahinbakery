@@ -43,19 +43,6 @@
     <!-- Template Javascript -->
     <script src="<?php echo base_url('assets/user/js/main.js');?>"></script>
     
-    <!-- Sweet Alert -->
-    <script>
-      <?php if ($this->session->flashdata('success_register')) { ?>
-        var isi = <?php echo json_encode($this->session->flashdata('success_register')) ?>;
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          text: isi,
-          title: 'success_register',
-        });
-      <?php } ?>
-    </script>
-    
 </body>
 
 </html>

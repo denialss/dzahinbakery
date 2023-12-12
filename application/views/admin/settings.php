@@ -56,6 +56,60 @@
                                 </div>
                             </div>
 
+                                <!-- /Raja Ongkir -->
+    <script>
+          $(document).ready(function() {
+            
+            // Masukkan data provinsi
+              $.ajax({
+                  type: "POST",
+                  url: "<?= base_url('rajaongkir/provinsi') ?>",
+                  success: function(hasil_provinsi){
+                      // console.log(hasil_provinsi);
+                      $("select[name=provinsi]").html(hasil_provinsi);
+                  }
+              });
+
+            // Masukkan data kota
+              $("select[name=provinsi]").on("change", function(){
+                var id_provinsi_terpilih = $("option:selected",this).attr("id_provinsi");
+                $.ajax({
+                  type: "POST",
+                  url: "<?= base_url('rajaongkir/kota') ?>",
+                  data : 'id_provinsi=' + id_provinsi_terpilih,
+                  success: function(hasil_kota){
+                    $("select[name=kota]").html(hasil_kota);
+                  }
+                });
+              });
+
+              // Masukkan data Ekspedisi
+              $("select[name=kota]").on("change", function(){
+                $.ajax({
+                  type: "POST",
+                  url: "<?= base_url('rajaongkir/ekspedisi') ?>",
+                  success: function(hasil_ekspedisi){
+                    $("select[name=ekspedisi]").html(hasil_ekspedisi);
+                  }
+                });
+              });
+
+              // Retrieve data Paket
+              $("select[name=ekspedisi]").on("change", function(){
+                $.ajax({
+                  type: "POST",
+                  url: "<?= base_url('rajaongkir/paket') ?>",
+                  success: function(hasil_paket){
+                  //console.log(hasil_paket);
+                    $("select[name=paket]").html(hasil_paket);
+                  }
+                });
+              });
+
+          });
+    </script>
+    <!-- /Raja Ongkir -->
+
                                       
 
                         <!-- taruh disini semua -->

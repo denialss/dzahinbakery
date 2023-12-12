@@ -85,7 +85,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Biaya pengiriman</h6>
-                            <h6 class="font-weight-medium">?</h6>
+                            <h6 class="font-weight-medium text-danger">[Silahkan Tekan <strong>Pembayaran</strong>]</h6>
                         </div>
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
@@ -93,7 +93,7 @@
                             <h6 class="font-weight-bold" style="font-size: 20px;">Total</h6>
                             <h6 class="font-weight-bold" style="font-size: 20px;">Rp. <?php echo $this->cart->format_number($this->cart->total());?></h6>
                         </div>
-                        <a type="submit" class="btn btn-block btn-primary my-3 py-3 text-light" href="<?php echo site_url('home/checkout');?>">Checkout</a>
+                        <a type="submit" class="btn btn-block btn-primary my-3 py-3 text-light" href="<?php echo site_url('home/checkout');?>">Pembayaran</a>
                     </div>
                 </div>
             </div>
