@@ -86,6 +86,46 @@ class Madmin extends CI_Model
 		$this->db->insert('tbl_detail_transaksi', $data_rinci);
 	}
 
+	public function verifikasi()
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_transaksi');
+		$this->db->where('idUser', $this->session->userdata('idUser'));
+		$this->db->where('statusPembayaran=0');
+		$this->db->order_by('idTransaksi', 'desc');
+		return $this->db->get()->result();
+	}
+
+	public function diproses()
+		{
+			$this->db->select('*');
+			$this->db->from('tbl_transaksi');
+			$this->db->where('idUser', $this->session->userdata('idUser'));
+			$this->db->where('statusPembayaran=1');
+			$this->db->order_by('idTransaksi', 'desc');
+			return $this->db->get()->result();
+		}
+
+	public function dikirim()
+		{
+			$this->db->select('*');
+			$this->db->from('tbl_transaksi');
+			$this->db->where('idUser', $this->session->userdata('idUser'));
+			$this->db->where('statusPembayaran=2');
+			$this->db->order_by('idTransaksi', 'desc');
+			return $this->db->get()->result();
+		}
+
+	public function selesai()
+		{
+			$this->db->select('*');
+			$this->db->from('tbl_transaksi');
+			$this->db->where('idUser', $this->session->userdata('idUser'));
+			$this->db->where('statusPembayaran=3');
+			$this->db->order_by('idTransaksi', 'desc');
+			return $this->db->get()->result();
+		}
+
   public function transaksi()
 	{
 		$this->db->select('*');
@@ -100,7 +140,7 @@ class Madmin extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tbl_transaksi');
-		$this->db->where('id_transaksi', $idTransaksi);
+		$this->db->where('idTransaksi', $idTransaksi);
 		return $this->db->get()->row();
 	}
 
@@ -108,11 +148,70 @@ class Madmin extends CI_Model
 	public function detail_transaksi_produk($idTransaksi)
 	{
 		$this->db->select('*');
-		$this->db->from('tbl_rinci_transaksi');
-		$this->db->join('tbl_transaksi', 'tbl_transaksi.no_order = tbl_rinci_transaksi.no_order', 'left');
-		$this->db->join('tbl_barang', 'tbl_barang.id_barang = tbl_rinci_transaksi.id_barang', 'left');
-		$this->db->where('id_transaksi', $idTransaksi);
+		$this->db->from('tbl_detail_transaksi');
+		$this->db->join('tbl_transaksi', 'tbl_transaksi.noPesanan = tbl_detail_transaksi.noPesanan', 'left');
+		$this->db->join('tbl_produk', 'tbl_produk.idProduk = tbl_detail_transaksi.idProduk', 'left');
+		$this->db->where('idTransaksi', $idTransaksi);
 		return $this->db->get()->result();
+	}
+
+	public function update_order($data)
+	{
+		$this->db->where('idTransaksi', $data['idTransaksi']);
+		$this->db->update('tbl_transaksi', $data);
+	}
+
+	public function tile_count_user()
+	{   
+		$query = $this->db->get('tbl_user');
+		if($query->num_rows()>0)
+		{
+		return $query->num_rows();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+
+	public function tile_count_produk()
+	{   
+		$query = $this->db->get('tbl_produk');
+		if($query->num_rows()>0)
+		{
+		return $query->num_rows();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+
+	public function tile_count_pesanan()
+	{   
+		$query = $this->db->get('tbl_transaksi');
+		if($query->num_rows()>0)
+		{
+		return $query->num_rows();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+
+	public function tile_count_stok()
+	{
+	$this->db->select_sum('stok');
+	$query = $this->db->get('tbl_produk');
+	if($query->num_rows()>0)
+	{
+		return $query->row()->stok;
+	}
+	else
+	{
+		return 0;
+	}
 	}
 
 

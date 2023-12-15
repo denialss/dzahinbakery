@@ -33,41 +33,22 @@
                                     <tbody>
                                     <?php foreach ($pesanan as $val) { ?>
                                         <tr scope="row">
-                                                <td class="align-middle"> <button type="text"  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Lihat Detail Pesanan"><a href="#" data-toggle="modal"  data-target="#lihatpesanan">#<?php echo $val->noPesanan; ?></a></button>
+                                                <td class="align-middle"><a href="<?php echo site_url('home/detail_pesanan/'. $val->idTransaksi);?>" class="btn btn-primary">#<?php echo $val->noPesanan; ?></a>
                                                 </td>
                                                 <td class="align-middle"><?php echo $val->tglPesanan; ?></td>
                                                 <td class="align-middle"><?php echo $val->namaPenerima; ?></td>
                                                 <td class="align-middle"><?php echo $val->alamat; ?></td>
-                                                <td class="align-middle"><?php echo $val->ekspedisi; ?></td>
-                                                <td class="align-middle" style="width: 6rem;">Rp. <?php echo number_format($val->total_bayar) ; ?><span class="badge badge-info align-middle p-1" title="Menunggu Konfirmasi dari Admin Maks.1X24 JAM">Proses Verifikasi</span></td>
+                                                <td class="align-middle"><?php echo $val->ekspedisi; ?><br>
+                                                Paket : <?= $val->paket ?><br>
+										        Ongkir : <?= number_format($val->ongkir, 0) ?>
+                                                </td>
+                                                <td class="align-middle" style="width: 6rem;">Rp. <?php echo number_format($val->total_bayar) ; ?>
+                                                <?php if ($val->statusPembayaran == 0) { ?>
+                                                    <span class="badge align-middle p-1 badge-info">Menunggu Verifikasi</span>
+                                                <?php } else { ?>
+                                                    <span class="badge align-middle p-1 badge-success">Sudah Bayar</span>
+                                                <?php } ?>
                                         </tr>
-
-                                        <!-- Modal Detail Pesanan -->
-                                        <div class="modal fade" id="lihatpesanan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                <h6 style="font-size:20px;"class="modal-title" id="exampleModalLabel">Detail Pesanan #<?php echo $val->noPesanan; ?></h6>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                <form method="post" name="tambahkategori" action="<?php echo site_url('admin/add_kategori'); ?>">
-                                                    <div class="form-group">
-                                                    <label for="inputEmail3" class="col-form-label text-">Nama Kategori :</label>
-                                                    <input type="text" name="namakategori" class="form-control" id="inputEmail3" require="required">
-                                                    </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                                                    <button type="submit" class="btn btn-success">Simpan</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <!-- /Modal Detail Pesanan -->
                                         <?php } ?>
                                     </tbody>
                                 </table>
@@ -88,22 +69,22 @@
                                       </tr>
                                       </thead>
                                       <tbody>
-                                      <!-- <tr scope="row">
-                                            <td class="align-middle"> <button type="text"  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Lihat Detail Pesanan"><a href="#" data-toggle="modal"  data-target="#lihatpesanan">#123</a></button>
-                                            </td>
-                                            <td class="align-middle"></td>
-                                            <td class="align-middle"></td>
-                                            <td class="align-middle"></td>
-                                            <td class="align-middle"></td>
-                                            <td class="align-middle"></td>
-                                                <td class="align-middle">
-                                                <a type="button" class="btn btn-success" title="Bayar Sekarang!" href="">
-                                                    <i class="bi bi-cash"></i>
-                                                </a>
+                                      <?php foreach ($pesanan_diproses as $val) { ?>
+                                        <tr scope="row">
+                                                <td class="align-middle"><a href="<?php echo site_url('home/detail_pesanan/'. $val->idTransaksi);?>" class="btn btn-primary">#<?php echo $val->noPesanan; ?></a>
                                                 </td>
+                                                <td class="align-middle"><?php echo $val->tglPesanan; ?></td>
+                                                <td class="align-middle"><?php echo $val->namaPenerima; ?></td>
+                                                <td class="align-middle"><?php echo $val->alamat; ?></td>
+                                                <td class="align-middle"><?php echo $val->ekspedisi; ?><br>
+                                                Paket : <?= $val->paket ?><br>
+										        Ongkir : <?= number_format($val->ongkir, 0) ?>
+                                                </td>
+                                                <td class="align-middle" style="width: 6rem;">Rp. <?php echo number_format($val->total_bayar) ; ?>
+                                                <span class="badge align-middle p-1 badge-info">Pesanan diproses</span>
 
-                                      </tr>
-                                      <tr class="spacer"><td colspan="100"></td></tr> -->
+                                        </tr>
+                                        <?php } ?>
                                       </tbody>
                             </table>
                         </div>
@@ -120,19 +101,29 @@
                                             <th scope="col" class="align-middle">Alamat</th>
                                             <th scope="col" class="align-middle">Ekspedisi</th>
                                             <th scope="col" class="align-middle">Total Bayar</th>
+                                            <th scope="col" class="align-middle">No Resi</th>
                                       </tr>
                                       </thead>
                                       <tbody>
-                                      <!-- <tr scope="row">
-                                            <td class="align-middle"> <button type="text"  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Lihat Detail Pesanan"><a href="#" data-toggle="modal"  data-target="#lihatpesanan">#123</a></button>
+                                      <?php foreach ($pesanan_dikirim as $val) { ?>
+                                            <tr scope="row">
+                                                <td class="align-middle"><a href="<?php echo site_url('home/detail_pesanan/'. $val->idTransaksi);?>" class="btn btn-primary">#<?php echo $val->noPesanan; ?></a>
+                                                </td>
+                                                <td class="align-middle"><?php echo $val->tglPesanan; ?></td>
+                                                <td class="align-middle"><?php echo $val->namaPenerima; ?></td>
+                                                <td class="align-middle"><?php echo $val->alamat; ?></td>
+                                                <td class="align-middle"><?php echo $val->ekspedisi; ?><br>
+                                                Paket : <?= $val->paket ?><br>
+                                                Ongkir : <?= number_format($val->ongkir, 0) ?></td>
+                                                <td class="align-middle" style="width: 6rem;">Rp. <?php echo number_format($val->total_bayar) ; ?>
+                                                <span class="badge align-middle p-1 badge-success">Pesanan dikirim</span>
+                                                </td>
+                                                <td class="align-middle"><?php echo $val->noResi; ?><br>
+											<button data-toggle="modal" data-target="#diterima<?= $val->idTransaksi ?>" class="btn btn-primary btn-xs btn-flat">Diterima</button>
                                             </td>
-                                            <td class="align-middle"> HUHAH</td>
-                                            <td class="align-middle">awd</td>
-                                            <td class="align-middle">tes</td>
-                                            <td class="align-middle">tes2</td>
-                                            <td class="align-middle">tes2</td>
-                                      </tr>
-                                      <tr class="spacer"><td colspan="100"></td></tr> -->
+                                            </tr>
+                                            <tr class="spacer"><td colspan="100"></td></tr>
+                                                                <?php } ?>
                                       </tbody>
                                   </table>
                         </div>
@@ -152,26 +143,53 @@
                                       </tr>
                                       </thead>
                                       <tbody>
-                                      <!-- <tr scope="row">
-                                            <td class="align-middle"> <button type="text"  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Lihat Detail Pesanan"><a href="#" data-toggle="modal"  data-target="#lihatpesanan">#123</a></button>
-                                            </td>
-                                            <td class="align-middle"> HUHAH</td>
-                                            <td class="align-middle">awd</td>
-                                            <td class="align-middle">tes</td>
-                                            <td class="align-middle">tes2</td>
-                                            <td class="align-middle">tes2<span class="badge badge-warning">Belum Bayar</span></td>
-                                                <td class="align-middle">
-                                                <a type="button" class="btn btn-success" title="Bayar Sekarang!" href="">
-                                                    <i class="bi bi-cash"></i>
-                                                </a>
+                                        <?php foreach ($pesanan_selesai as $val) { ?>
+                                            <tr scope="row">
+                                                <td class="align-middle"><a href="<?php echo site_url('home/detail_pesanan/'. $val->idTransaksi);?>" class="btn btn-primary">#<?php echo $val->noPesanan; ?></a>
                                                 </td>
-
-                                      </tr>
-                                      <tr class="spacer"><td colspan="100"></td></tr> -->
+                                                <td class="align-middle"><?php echo $val->tglPesanan; ?></td>
+                                                <td class="align-middle"><?php echo $val->namaPenerima; ?></td>
+                                                <td class="align-middle"><?php echo $val->alamat; ?></td>
+                                                <td class="align-middle"><?php echo $val->ekspedisi; ?><br>
+                                                Paket : <?= $val->paket ?><br>
+                                                Ongkir : <?= number_format($val->ongkir, 0) ?></td>
+                                                <td class="align-middle" style="width: 6rem;">Rp. <?php echo number_format($val->total_bayar) ; ?>
+                                                <span class="badge align-middle p-1 badge-success">Pesanan diterima</span>
+                                                </td>
+                                                <td class="align-middle"><?php echo $val->noResi; ?></td>
+                                            </tr>
+                                            <tr class="spacer"><td colspan="100"></td></tr>
+                                        <?php } ?>
                                       </tbody>
                             </table>
                         </div>
                         <!-- Pesanan Selesai -->
+
+
+                        <?php foreach ($pesanan_dikirim as $val) { ?>
+                            <div class="modal fade" id="diterima<?= $val->idTransaksi ?>">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Pesanan Diterima</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah Anda Yakin Pesanan Sudah Terima Produk?
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                                            <a href="<?= site_url('home/diterima/' . $val->idTransaksi) ?>" class="btn btn-primary">Ya</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                        <?php } ?>
                         
 
                     </div>

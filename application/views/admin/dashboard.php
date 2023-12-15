@@ -1,19 +1,36 @@
 <!-- page content -->
 <div class="right_col" role="main">
 
-          <div class="row mt-5">
+          <div class="row mt-4">
             <div class="col-md-12 col-sm-12 ">
               <div class="dashboard_graph">
 
+                <div class="row mt-1">
+                  <div class="col-12 text-center">
+                    <div class="tile_count">
+                      <div class="col-lg-3 col-sm-4  tile_stats_count">
+                        <h5><i class="bi bi-person-fill"></i> Total User</h5>
+                        <div class="count"><?php echo $user; ?></div>
+                      </div>
+                      <div class="col-lg-3 col-sm-4  tile_stats_count">
+                        <h5 class="count_top"><i class="bi bi-box-seam-fill"></i> Total Produk</h5>
+                        <div class="count"><?php echo $produk; ?></div>
+                      </div>
+                      <div class="col-lg-3 col-sm-4  tile_stats_count">
+                        <h5 class="count_top"><i class="bi bi-basket3-fill"></i> Total Stok</h5>
+                        <div class="count"><?php echo $stok; ?></div>
+                      </div>
+                      <div class="col-lg-3 col-sm-4  tile_stats_count">
+                        <h5 class="count_top"><i class="bi bi-clipboard-check-fill"></i> Total Pesanan</h5>
+                        <div class="count"><?php echo $pesanan; ?></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  
                 <div class="row x_title">
                   <div class="col-md-6">
                     <h3>Grafik Penjualan</h3>
-                  </div>
-                  <div class="col-md-6">
-                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                      <span>January 01, 2023 - January 06, 2023</span> <b class="caret"></b>
-                    </div>
                   </div>
                 </div>
 

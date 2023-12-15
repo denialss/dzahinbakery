@@ -26,26 +26,13 @@
 
             <div class="col-lg-7 pb-5">
                 <h3 class="font-weight-semi-bold"><?php echo $produk->namaProduk; ?></h3>
-                <h3 class="font-weight-semi-bold" value="<?php echo $produk->idKategori; ?>"><?php echo $produk->namaKategori; ?></h3>
+                <h3 class="font-weight-semi-bold"><?php echo $produk->namaKategori; ?></h3>
                 <h3 class="font-weight-semi-bold mb-4">Rp. <?php echo number_format($produk->harga, 0); ?></h3>
                 <p class="mb-4"><?php echo $produk->deskripsi_produk; ?></p>
 
 
                 <div class="d-flex align-items-center mb-4 pt-2">
-                    <div class="input-group quantity mr-3" style="width: 130px;">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus">
-                                <i class="bi bi-dash-lg"></i>
-                            </button>
-                        </div>
-                        <input type="text" class="form-control bg-secondary text-center" value="1">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
-                                <i class="bi bi-plus-lg"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <a class="btn btn-primary px-3" href="<?php echo site_url('home/add_cart/'. $produk->idProduk);?>"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
+                    <a class="btn btn-primary px-3" href="<?php echo site_url('home/add_cart/'. $produk->idProduk);?>"><i class="bi bi-bag-plus-fill mr-1"></i> Add To Cart</a>
                 </div>
             </div>
         </div>

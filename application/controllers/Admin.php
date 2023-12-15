@@ -8,6 +8,8 @@ class Admin extends CI_Controller
     parent::__construct();
     $this->load->library('form_validation');
     $this->load->model('Madmin');
+    $this->load->model('M_pesanan_masuk');
+    $this->load->model('M_penjualan');
   }
 
     public function index()
@@ -15,9 +17,15 @@ class Admin extends CI_Controller
       if (empty($this->session->userdata('username'))) {
           redirect('admin/login');
       }
+
+      $data['user'] = $this->Madmin->tile_count_user();
+      $data['produk'] = $this->Madmin->tile_count_produk();
+      $data['pesanan'] = $this->Madmin->tile_count_pesanan();
+      $data['stok'] = $this->Madmin->tile_count_stok();
+
       $this->load->view('admin/sidebar');
       $this->load->view('admin/menu');
-      $this->load->view('admin/dashboard');
+      $this->load->view('admin/dashboard', $data);
       $this->load->view('admin/footer');
     }
 
@@ -182,7 +190,10 @@ class Admin extends CI_Controller
     // /Olah Data Kategori --------------------------------------------------------------------
 
   public function pesanan(){
-        $data['pesanan'] = $this->Madmin->get_all_data('tbl_transaksi')->result();
+        $data['pesanan'] = $this->M_pesanan_masuk->pesanan();
+        $data['pesanan_diproses'] = $this->M_pesanan_masuk->pesanan_diproses();
+        $data['pesanan_dikirim'] = $this->M_pesanan_masuk->pesanan_dikirim();
+        $data['pesanan_selesai'] = $this->M_pesanan_masuk->pesanan_selesai();
 
         $this->load->view('admin/sidebar');
         $this->load->view('admin/menu');
@@ -190,10 +201,65 @@ class Admin extends CI_Controller
         $this->load->view('admin/footer');
     }
 
+  public function konfirmasi_pembayaran($idTransaksi)
+    {
+      $data = array(
+        'idTransaksi' => $idTransaksi,
+        'statusPembayaran' => '1'
+      );
+      $this->M_pesanan_masuk->update_order($data);
+      redirect('admin/pesanan');
+    }
+
+  public function kirim_pesanan($idTransaksi)
+    {
+      $data = array(
+        'idTransaksi' => $idTransaksi,
+        'noResi' => $this->input->post('noResi'),
+        'statusPembayaran' => '2'
+      );
+      $this->M_pesanan_masuk->update_order($data);
+      redirect('admin/pesanan');
+    }
+
   public function penjualan(){
         $this->load->view('admin/sidebar');
         $this->load->view('admin/menu');
         $this->load->view('admin/penjualan');
+        $this->load->view('admin/footer');
+    }
+
+  public function lap_bulanan()
+    {
+        $bulan = $this->input->post('bulan');
+        $tahun = $this->input->post('tahun');
+
+        $data = array(
+            'title' => 'Laporan Penjualan Bulanan',
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+        );
+        $data['laporan'] = $this->M_penjualan->lap_bulanan($bulan, $tahun);
+        
+        $this->load->view('admin/sidebar');
+        $this->load->view('admin/menu');
+        $this->load->view('admin/lap_bulanan', $data);
+        $this->load->view('admin/footer');
+    }
+
+  public function lap_tahunan()
+    {
+        $tahun = $this->input->post('tahun');
+
+        $data = array(
+            'title' => 'Laporan Penjualan Tahunan',
+            'tahun' => $tahun,
+        );
+        $data['laporan'] = $this->M_penjualan->lap_tahunan($tahun);
+        
+        $this->load->view('admin/sidebar');
+        $this->load->view('admin/menu');
+        $this->load->view('admin/lap_tahunan', $data);
         $this->load->view('admin/footer');
     }
 

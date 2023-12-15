@@ -128,14 +128,15 @@
                             <input name="estimasi" hidden>
                             <input name="ongkir" hidden>
                             <input name="berat" value="<?= $tot_berat ?>" hidden>
+                            <input name="subtotal" value="<?= $this->cart->total() ?>" hidden>
                             <input name="total_bayar" hidden>
                             <!-- end Simpan Transaksi -->
                             <!-- Simpan Rinci Transaksi -->
                             <?php
                             $i = 1;
-                            foreach ($this->cart->contents() as $items) {
-                                echo form_hidden('qty' . $i++, $items['qty']);
-                                echo form_hidden('name', $items['name']);
+                            foreach ($this->cart->contents() as $item) {
+                                echo form_hidden('qty' . $i++, $item['qty']);
+                                echo form_hidden('name', $item['name']);
                             }
 
                             ?>

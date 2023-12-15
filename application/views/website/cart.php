@@ -48,18 +48,7 @@
                             <td class="align-middle"> <?php echo number_format($item['price'], 0); ?></td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus">
-                                            <i class="bi bi-dash-lg"></i>
-                                        </button>
-                                    </div>
-                                    <input name="qty" type="text" class="form-control form-control-sm bg-secondary text-center"
-                                        value="<?php echo $item['qty']; ?>">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="bi bi-plus-lg"></i>
-                                        </button>
-                                    </div>
+                                    <input id="quantity_<?php echo $item['rowid']; ?>" type="number" class="form-control form-control-sm text-center" value="<?php echo $item['qty']; ?>">
                                 </div>
                             </td>
                             <td class="align-middle"> <?php echo number_format($item['price']* $item["qty"] , 0); ?></td>
@@ -101,3 +90,23 @@
         </div>
     </div>
     <!-- Cart End -->
+
+    <script>
+    $(document).ready(function() {
+        $('input[type="number"]').on('change', function() {
+            var rowid = $(this).attr('id').split('_')[1];
+            var newQuantity = $(this).val();
+
+
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('Home/update_cart'); ?>",
+                data: {rowid: rowid, qty: newQuantity},
+                success: function(response) {
+                    
+                    location.reload(); 
+                }
+            });
+        });
+    });
+    </script>

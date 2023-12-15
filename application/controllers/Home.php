@@ -4,6 +4,7 @@ class Home extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('Madmin');
+		$this->load->model('M_pesanan_masuk');
 		$this->load->library('cart');
 		}
 
@@ -36,7 +37,7 @@ class Home extends CI_Controller{
 			$this->session->set_userdata($user_session);
 			redirect('home');
 		  } else {
-			echo 'error';
+			redirect('home');
 		  }
 		}
 
@@ -79,7 +80,6 @@ class Home extends CI_Controller{
 
 	public function detail_produk($idProduk){
         	$dataWhere = array('idProduk' => $idProduk);
-			$data['detailProduk'] = $this->Madmin->get_by_id('tbl_produk', $dataWhere)->row_object();
         	$data['produk'] = $this->Madmin->tampilJoin()->row_object();
 			$this->load->view('website/header');
 			$this->load->view('website/detail_produk', $data);
@@ -124,16 +124,15 @@ class Home extends CI_Controller{
 
 	public function update_cart()
 		{
-			$i = 1;
-			foreach ($this->cart->contents() as $item){
-				$dataUpdate = array(
-					'rowid' => $item['rowid'],
-					'qty' => $this->input->post('qty'),
-				);
+			$rowid = $this->input->post('rowid');
+			$qty = $this->input->post('qty');
+		
+			$dataUpdate = array(
+				'rowid' => $rowid,
+				'qty' => $qty
+			);
 	
 				$this->cart->update($dataUpdate);
-				$i++;
-			}
 			redirect(base_url('home/cart'));
 		}
 	
@@ -178,26 +177,27 @@ class Home extends CI_Controller{
 				'ongkir' => $this->input->post('ongkir'),
 				'berat' => $this->input->post('berat'),
 				'buktiPembayaran' => $data_file['file_name'],
+				'subtotal' => $this->input->post('subtotal'),
 				'total_bayar' => $this->input->post('total_bayar'),
-				'statusPembayaran' => '1',
-				'statusPesanan' => '0',
+				'atasNama' => $this->input->post('atasNama'),
+				'statusPembayaran' => '0',
+				'statusPesanan' => '1',
 			);
 			
 				$this->Madmin->simpan_transaksi($data);
 				//simpan ke tabel rinci transaksi
 				$i = 1;
-				foreach ($this->cart->contents() as $items) {
+				foreach ($this->cart->contents() as $item) {
 					$data_rinci = array(
 						'noPesanan' => $this->input->post('noPesanan'),
-						'idProduk' => $items['id'],
+						'idProduk' => $item['id'],
 						'qty' => $this->input->post('qty' . $i++),
-						'namaProduk' => $items['name'],
+						'namaProduk' => $item['name'],
 					);
 					$this->Madmin->simpan_rinci_transaksi($data_rinci);
 			//=========================================
-			$this->session->set_flashdata('pesan', 'Pesanan Berhasil Di Proses !!!');
 			$this->cart->destroy();
-			redirect('home/pesanan');
+			redirect(base_url('home/pesanan'));
 			}
 		}
 	}
@@ -239,14 +239,36 @@ class Home extends CI_Controller{
 			'address' => $address,
 		  );
 		  $this->Madmin->update('tbl_user', $dataUpdate, 'idUser', $id);
-		  redirect('home');
+		redirect(base_url('home'));
 		}
 
 	public function pesanan(){
-			$data['pesanan'] = $this->Madmin->transaksi();
+			$data['pesanan'] = $this->Madmin->verifikasi();
+        	$data['pesanan_diproses'] = $this->Madmin->diproses();
+        	$data['pesanan_dikirim'] = $this->Madmin->dikirim();
+        	$data['pesanan_selesai'] = $this->Madmin->selesai();
 
 			$this->load->view('website/header');
 			$this->load->view('website/pesanan', $data);
 			$this->load->view('website/footer');
+		}
+
+	public function detail_pesanan($idTransaksi){
+			$data['pesanan'] = $this->Madmin->detail_transaksi($idTransaksi);
+			$data['produk'] = $this->Madmin->detail_transaksi_produk($idTransaksi);
+
+			$this->load->view('website/header');
+			$this->load->view('website/detail_pesanan', $data);
+			$this->load->view('website/footer');
+		}
+
+	public function diterima($idTransaksi)
+		{
+			$data = array(
+				'idTransaksi' => $idTransaksi,
+				'statusPembayaran' => '3'
+			);
+			$this->M_pesanan_masuk->update_order($data);
+		redirect(base_url('home/pesanan'));
 		}
 }
