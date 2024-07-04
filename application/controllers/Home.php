@@ -271,4 +271,48 @@ class Home extends CI_Controller{
 			$this->M_pesanan_masuk->update_order($data);
 		redirect(base_url('home/pesanan'));
 		}
+		
+		public function filter_products() {
+			$category = $this->input->post('category');
+			$price_range = $this->input->post('price_range');
+			$filteredProducts = $this->Madmin->get_filtered_products($category, $price_range)->result();
+		
+			// Load a view to render filtered products dynamically
+			$this->load->view('website/filtered_products', ['filteredProducts' => $filteredProducts]);
+		}
+		
+		public function filter_kue_basah() {
+			$price_range = $this->input->post('price_range');
+			if ($price_range === null) {
+				$price_range = 30000; // Set default value if price range is not set
+			}
+			$data['detailProduk'] = $this->Madmin->get_filtered_kue_basah($price_range);
+			$this->load->view('website/product_list', $data);
+		}
+		
+		public function filter_kue_kering() {
+			$price_range = $this->input->post('price_range');
+			if ($price_range === null) {
+				$price_range = 30000; // Set default value if price range is not set
+			}
+			$data['detailProduk'] = $this->Madmin->get_filtered_kue_kering($price_range);
+			$this->load->view('website/product_list', $data);
+		}
+
+		public function filter_all_produk() {
+			$price_range = $this->input->post('price_range');
+			if ($price_range === null) {
+				$price_range = 30000; // Set default value if price range is not set
+			}
+			$data['detailProduk'] = $this->Madmin->get_filtered_all_produk($price_range);
+			$this->load->view('website/filtered_products', $data);
+		}
+		
+		public function tes(){
+			$data['pesanana'] = $this->Madmin->tes();
+			$this->load->view('website/header');
+			$this->load->view('website/tes' ,$data);
+			$this->load->view('website/footer');
+		}
+		
 }

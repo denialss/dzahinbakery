@@ -213,6 +213,61 @@ class Madmin extends CI_Model
 		return 0;
 	}
 	}
+	
+	public function get_filtered_products($category, $price_range) {
+		$this->db->select('*');
+		$this->db->from('tbl_produk');
+		$this->db->join('tbl_kategori', 'tbl_produk.idKategori = tbl_kategori.idKategori', 'left');
+	
+		if ($category !== 'all') {
+			$this->db->where('tbl_kategori.namaKategori', $category);
+		}
+	
+		$this->db->where('tbl_produk.harga <=', $price_range);
+	
+		return $this->db->get();
+	}
+	
+	public function get_filtered_kue_basah($price_range) {
+		$this->db->select('*');
+		$this->db->from('tbl_produk');
+		$this->db->join('tbl_kategori', 'tbl_produk.idKategori = tbl_kategori.idKategori', 'left');
+		$this->db->where('tbl_kategori.namaKategori', 'kue basah');
+		$this->db->where('tbl_produk.harga <=', $price_range);
+		return $this->db->get()->result();
+	}
+	
+	public function get_filtered_kue_kering($price_range) {
+		$this->db->select('*');
+		$this->db->from('tbl_produk');
+		$this->db->join('tbl_kategori', 'tbl_produk.idKategori = tbl_kategori.idKategori', 'left');
+		$this->db->where('tbl_kategori.namaKategori', 'kue kering');
+		$this->db->where('tbl_produk.harga <=', $price_range);
+		return $this->db->get()->result();
+	}
+
+	public function get_filtered_all_produk($price_range) {
+		$this->db->select('*');
+		$this->db->from('tbl_produk');
+		$this->db->join('tbl_kategori', 'tbl_produk.idKategori = tbl_kategori.idKategori', 'left');
+		$this->db->where('tbl_produk.harga <=', $price_range);
+		return $this->db->get()->result();
+	}
+	
+	
+	
+	
+	
+
+	public function tes(){
+		$this->db->select('*');
+		$this->db->from('tbl_produk');
+		$this->db->join('tbl_kategori', 'tbl_kategori.idKategori = tbl_produk.idKategori', 'left');
+
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
 
 
 
